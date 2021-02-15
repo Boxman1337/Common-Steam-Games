@@ -22,7 +22,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 # stack build
 dependencies:
 - base >= 4.7 && < 5
-- json
+- aeson
 
 library:
   source-dirs: src
