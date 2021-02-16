@@ -24,6 +24,7 @@ dependencies:
 - base >= 4.7 && < 5
 - aeson
 - HTTP
+- bytestring
 
 library:
   source-dirs: src

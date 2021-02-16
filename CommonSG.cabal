@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3cde49f74e2c010e2c648cf6cf1242d867c7ac9ae02f6fe6cd15c4fda9e55510
+-- hash: bc933d984e07fa5c7982489aa9dbfd7679a5da79c05e4549a2160aa370c4dacf
 
 name:           CommonSG
 version:        0.1.0.0
@@ -26,6 +26,8 @@ source-repository head
   location: https://github.com/githubuser/CommonSG
 
 library
+  exposed-modules:
+      Lib
   other-modules:
       Paths_CommonSG
   hs-source-dirs:
@@ -34,6 +36,7 @@ library
       HTTP
     , aeson
     , base >=4.7 && <5
+    , bytestring
   default-language: Haskell2010
 
 executable CommonSG-exe
@@ -48,6 +51,7 @@ executable CommonSG-exe
     , HTTP
     , aeson
     , base >=4.7 && <5
+    , bytestring
   default-language: Haskell2010
 
 test-suite CommonSG-test
@@ -63,4 +67,5 @@ test-suite CommonSG-test
     , HTTP
     , aeson
     , base >=4.7 && <5
+    , bytestring
   default-language: Haskell2010
