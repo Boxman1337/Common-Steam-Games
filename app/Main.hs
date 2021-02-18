@@ -3,7 +3,7 @@ module Main where
 -- Libraries
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson
-import Network.HTTP
+import Network.HTTP.Conduit
 
 data User =
     User { username :: String
@@ -20,10 +20,11 @@ createURL = do
     putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
     steam64 <- getLine
     putStrLn ("You entered '" ++ steam64 ++ "'")
-    putStrLn ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
+    return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
 main = do
-    createURL
+    url <- createURL
+    simpleHttp url
 
 
 
@@ -41,6 +42,8 @@ main = do
     ---------------------
     
     stack install <library>
+    or 
+    cabal install <library>
     then add <library> under package.yaml dependencies
     do not change .cabal manually, each library is added automatically by stack
 
