@@ -1,24 +1,44 @@
+{-#LANGUAGE DeriveGeneric#-}
+
+
 module Main where
 
 -- Libraries
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson
 import Network.HTTP
-
+import Control.Applicative {- osäker-}
+import Control.Monad
+import GHC.Generics
 
 data User =
     User { username :: String
          , steam64 :: String
          , ownedGames :: [String]
-         } deriving (Show)
+         } deriving (Show,Generic)
 
 
 
+
+
+instance FromJSON User
+instance ToJSON User
+
+
+jsonURL :: String
 jsonURL = getSteam64 minSt
 
+--getJSON :: IO B.ByteString
+--getJSON = simpleHTTP $ getRequest jsonURL
 
+getJSON2 :: IO B.ByteString
+getJSON2 = simpleHttp jsonURL
 
 minSt = "76561198046588035"
+
+
+
+
 
 
 main = do
