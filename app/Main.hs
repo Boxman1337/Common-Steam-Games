@@ -1,20 +1,21 @@
+{-# LANGUAGE DeriveGeneric, OverloadedStrings#-}
+{-# LANGUAGE StrictData #-}
+
 module Main where
 
 -- Libraries
 import qualified Data.ByteString.Lazy as B
+import qualified Data.ByteString.Lazy.Char8 as C
 import Data.Aeson
 import Network.HTTP.Conduit
-
-data User =
-    User { username :: String
-         , steam64 :: String
-         , ownedGames :: [String]
-         } deriving (Show)
-
-
+import GHC.Generics
+import Data.Text
 
 apiKey :: String
 apiKey = "0786DE3A3F9117713096BAE4347B357A"
+
+stdURL :: String
+stdURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true"
 
 createURL = do
     putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
@@ -22,11 +23,11 @@ createURL = do
     putStrLn ("You entered '" ++ steam64 ++ "'")
     return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
-main = do
-    url <- createURL
-    simpleHttp url
-
-
+getJSON :: IO C.ByteString
+getJSON = simpleHttp stdURL
+    
+main = 
+    simpleHttp stdURL >>= C.putStrLn
 
 
 
@@ -71,8 +72,10 @@ main = do
     References: 
     ---------------------
     
-    https://stackoverflow.com/questions/29941866/parsing-json-data-from-a-url-in-haskell-using-aeson
-    https://hackage.haskell.org/package/http-conduit-2.3.7.4/docs/Network-HTTP-Conduit.html
-    https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
+    https://stackoverflow.com/questions/29941866/parsing-json-data-from-a-url-in-haskell-using-aeson (Accessed 14 Feb)
+    https://hackage.haskell.org/package/http-conduit-2.3.7.4/docs/Network-HTTP-Conduit.html (Accessed 15 Feb)
+    https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json (Accessed 15 Feb)
+    https://artyom.me/aeson (Accessed 18 Feb)
+    https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
 
 -}

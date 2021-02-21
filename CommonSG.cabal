@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8015cd7ce20a17fe4d87fb69dcb3ab6b2deb2c8026240d82604238992c7d95cd
+-- hash: 25f23d427cb2ac40abf743200b0934b2b933b9497a4f557ef2ea8e3637df48f5
 
 name:           CommonSG
 version:        0.1.0.0
@@ -38,6 +38,8 @@ library
     , base >=4.7 && <5
     , bytestring
     , http-conduit
+    , text
+    , vector
   default-language: Haskell2010
 
 executable CommonSG-exe
@@ -54,6 +56,8 @@ executable CommonSG-exe
     , base >=4.7 && <5
     , bytestring
     , http-conduit
+    , text
+    , vector
   default-language: Haskell2010
 
 test-suite CommonSG-test
@@ -71,4 +75,6 @@ test-suite CommonSG-test
     , base >=4.7 && <5
     , bytestring
     , http-conduit
+    , text
+    , vector
   default-language: Haskell2010
