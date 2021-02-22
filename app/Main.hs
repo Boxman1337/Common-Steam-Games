@@ -1,28 +1,90 @@
 {-#LANGUAGE DeriveGeneric#-}
+{-# LANGUAGE OverloadedStrings #-}
 
 
 module Main where
 
 -- Libraries
 import qualified Data.ByteString.Lazy as B
+import qualified Data.ByteString.Lazy.Char8 as C
 import Data.Aeson
-import Network.HTTP
-import Control.Applicative {- osäker-}
-import Control.Monad
+import Network.HTTP.Conduit
+import Control.Applicative{-osäker-}
+import Control.Monad{-osäker-}
 import GHC.Generics
+import Data.Text
+
 
 data User =
     User { username :: String
          , steam64 :: String
          , ownedGames :: [String]
-         } deriving (Show,Generic)
+         } deriving (Show)
+
+
+data UserResponse = UserResponse
+    { gameCount :: Int
+    , listOfGames :: [Game]
+    } deriving (Show)
+
+data Game = Game
+    { appidGame :: Int
+    , nameGame :: Text
+    , playtimeForeverGame :: Int
+    , imgIconURLGame :: Text
+    , imgLogoURLGame :: Text
+    , playtimeWindowsForeverGame :: Maybe Int
+    , playtimeMACForeverGame :: Maybe Int
+    , playtimeLinuxForeverGame :: Maybe Int
+    , hasCommunityVisibleStatsGame :: Maybe Bool
+    , playtimeMACForeveRGame :: Maybe Int
+    , playtime2WeeksGame :: Maybe Int
+    } deriving (Show)
+
+
+
+data GamesList =
+  GamesList {game_count :: Int
+            , games :: [Game] deriving (Show,Generic)
+
+data Rep =
+  Rep {response :: GamesList} deriving (Show,Generic)
+
+
+
+data Haks = Haks [Int] deriving (Show,Generic)
 
 
 
 
+instance FromJSON Main.Rep
+instance ToJSON Main.Rep
 
-instance FromJSON User
-instance ToJSON User
+
+instance FromJSON GamesList
+instance ToJSON GamesList
+
+instance FromJSON UserResponse where
+    parseJSON (Object v) = UserResponse
+        <$> v .: "game_count"
+        <*> v .: "games"
+
+instance FromJSON Game where
+    parseJSON (Object v) = Game
+        <$> v .: "appid"
+        <*> v .: "name"
+        <*> v .: "playtime_forever"
+        <*> v .: "img_icon_url"
+        <*> v .: "img_logo_url"
+        <*> v .:? "playtime_windows_forever"
+        <*> v .:? "playtime_mac_forever"
+        <*> v .:? "playtime_linux_forever"
+        <*> v .:? "has_community_visible_stats"
+        <*> v .:? "playtime_mac_foreve r"
+        <*> v .:? "playtime_2weeks"
+
+
+
 
 
 jsonURL :: String
@@ -36,8 +98,13 @@ getJSON2 = simpleHttp jsonURL
 
 minSt = "76561198046588035"
 
+--dec :: Maybe Value
+--dec = decode <$> getJSON2
 
-
+tst :: IO ()
+tst = do
+   jss <- decode <$> getJSON2
+   print (jss :: Maybe Value)
 
 
 
@@ -47,7 +114,7 @@ main = do
     if stId == "no"
       then do
         main
-        else putStrLn (getSteam64 stId)
+        else getJSON2
 
 getSteam64  :: String -> String
 getSteam64 "" =  ""
@@ -61,10 +128,8 @@ createURL = do
     putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
     steam64 <- getLine
     putStrLn ("You entered '" ++ steam64 ++ "'")
-    putStrLn ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
+    return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
-main3 = do
-    createURL
 
 
 {- 
@@ -79,6 +144,8 @@ main3 = do
     ---------------------
     
     stack install <library>
+    or 
+    cabal install <library>
     then add <library> under package.yaml dependencies
     do not change .cabal manually, each library is added automatically by stack
 
@@ -111,3 +178,4 @@ main3 = do
     https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
 
 -}
+
