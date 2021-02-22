@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveGeneric, OverloadedStrings#-}
-{-# LANGUAGE StrictData #-}
+{-# LANGUAGE DeriveGeneric #-} 
+{-# LANGUAGE OverloadedStrings #-}
 
 module Main where
 
@@ -7,9 +7,58 @@ module Main where
 import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Lazy.Char8 as C
 import Data.Aeson
-import Network.HTTP.Conduit
+import Network.HTTP.Conduit (simpleHttp)
 import GHC.Generics
 import Data.Text
+
+data JSONResponse = JSONResponse
+    { userResponse :: UserResponse
+    } deriving (Show)
+
+data UserResponse = UserResponse
+    { gameCount :: Int
+    , listOfGames :: [Game]
+    } deriving (Show)
+
+data Game = Game
+    { appidGame :: Int
+    , nameGame :: Text
+    , playtimeForeverGame :: Int
+    , imgIconURLGame :: Text
+    , imgLogoURLGame :: Text
+    , playtimeWindowsForeverGame :: Maybe Int
+    , playtimeMACForeverGame :: Maybe Int
+    , playtimeLinuxForeverGame :: Maybe Int
+    , hasCommunityVisibleStatsGame :: Maybe Bool
+    , playtimeMACForeveRGame :: Maybe Int
+    , playtime2WeeksGame :: Maybe Int
+    } deriving (Show)
+
+instance FromJSON JSONResponse where
+    parseJSON (Object v) = JSONResponse
+        <$> v .: "response"
+
+instance FromJSON UserResponse where
+    parseJSON (Object v) = UserResponse
+        <$> v .: "game_count"
+        <*> v .: "games"
+
+instance FromJSON Game where
+    parseJSON (Object v) = Game
+        <$> v .: "appid"
+        <*> v .: "name"
+        <*> v .: "playtime_forever"
+        <*> v .: "img_icon_url"
+        <*> v .: "img_logo_url"
+        <*> v .:? "playtime_windows_forever"
+        <*> v .:? "playtime_mac_forever"
+        <*> v .:? "playtime_linux_forever"
+        <*> v .:? "has_community_visible_stats"
+        <*> v .:? "playtime_mac_foreve r"
+        <*> v .:? "playtime_2weeks"
+
+-- maybeParseJSON :: Maybe UserResponse
+-- maybeParseJSON = decode $ simpleHttp stdURL :: Maybe UserResponse
 
 apiKey :: String
 apiKey = "0786DE3A3F9117713096BAE4347B357A"
@@ -17,22 +66,21 @@ apiKey = "0786DE3A3F9117713096BAE4347B357A"
 stdURL :: String
 stdURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true"
 
+getJSON :: IO C.ByteString
+getJSON = simpleHttp stdURL
+
 createURL = do
     putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
     steam64 <- getLine
-    putStrLn ("You entered '" ++ steam64 ++ "'")
     return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
-getJSON :: IO C.ByteString
-getJSON = simpleHttp stdURL
-    
-main = 
-    simpleHttp stdURL >>= C.putStrLn
-
-
+main = do
+    jsonFormat <- simpleHttp stdURL
+    let parsed = decode jsonFormat :: Maybe JSONResponse
+    return parsed
 
 {- 
-    Compile / Runtime Instructions:
+    Compile / Runtime Instructions: 
     ---------------------
 
     stack build
@@ -77,5 +125,6 @@ main =
     https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json (Accessed 15 Feb)
     https://artyom.me/aeson (Accessed 18 Feb)
     https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
+    https://jsonformatter.org/json-to-haskell (Accessed 22 Feb)
 
 -}
