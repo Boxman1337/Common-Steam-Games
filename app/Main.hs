@@ -4,11 +4,9 @@
 module Main where
 
 -- Libraries
-import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Lazy.Char8 as C
 import Data.Aeson
 import Network.HTTP.Conduit (simpleHttp)
-import GHC.Generics
 import Data.Text
 
 data JSONResponse = JSONResponse
@@ -77,7 +75,9 @@ createURL = do
 main = do
     jsonFormat <- simpleHttp stdURL
     let parsed = decode jsonFormat :: Maybe JSONResponse
-    return parsed
+    case parsed of 
+        Just value -> case value of
+            JSONResponse value -> return $ gameCount value
 
 {- 
     Compile / Runtime Instructions: 
