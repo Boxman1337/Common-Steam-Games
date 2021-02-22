@@ -101,11 +101,7 @@ main = do
     ---------------------
     
         Skriva en main som frågar efter steam64 och ger tillbaka en lista av ägda spel
-        1) Få tillbaka en URL till Steams API från ett steam64-id
-
-        lådan 64: 76561198068497293
-        URL: http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true
-        
+        1) Få tillbaka en URL till Steams API från ett steam64-id        
         2) Ansluta till URL och få tillbaka en JSON-sträng/fil
         3) Filtrera ut relevant data ur JSON-strängen
         4) Lägg data i en lista
@@ -120,6 +116,8 @@ main = do
     References: 
     ---------------------
     
+    http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true
+
     https://stackoverflow.com/questions/29941866/parsing-json-data-from-a-url-in-haskell-using-aeson (Accessed 14 Feb)
     https://hackage.haskell.org/package/http-conduit-2.3.7.4/docs/Network-HTTP-Conduit.html (Accessed 15 Feb)
     https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json (Accessed 15 Feb)
