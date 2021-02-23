@@ -3,7 +3,7 @@
 
 module JSONParsing where
 
--- Libraries
+-- Libraries and modules
 import qualified Data.ByteString.Lazy.Char8 as C
 import Network.HTTP.Conduit (simpleHttp)
 import Control.Monad
@@ -72,11 +72,4 @@ extractFromJSON url = do
     case parsed of 
         Left err -> putStrLn err
         Right v -> print v
-
-main :: IO ()
-main = do
-    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
-    inputID <- getLine
-    let userURL = createURL $ show inputID
-    extractFromJSON userURL
  
