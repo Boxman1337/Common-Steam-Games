@@ -5,8 +5,9 @@ module Main where
 
 -- Libraries
 import qualified Data.ByteString.Lazy.Char8 as C
-import Data.Aeson
 import Network.HTTP.Conduit (simpleHttp)
+import Control.Monad
+import Data.Aeson
 import Data.Text
 
 data JSONResponse = JSONResponse
@@ -55,9 +56,6 @@ instance FromJSON Game where
         <*> v .:? "playtime_mac_foreve r"
         <*> v .:? "playtime_2weeks"
 
--- maybeParseJSON :: Maybe UserResponse
--- maybeParseJSON = decode $ simpleHttp stdURL :: Maybe UserResponse
-
 apiKey :: String
 apiKey = "0786DE3A3F9117713096BAE4347B357A"
 
@@ -67,18 +65,19 @@ stdURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=07
 getJSON :: IO C.ByteString
 getJSON = simpleHttp stdURL
 
-createURL = do
-    putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
-    steam64 <- getLine
+createURL apiKey steam64 = do
     return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
+
+inputLoop = forever $ do
+    putStrLn "Type a valid Steam64 to a public Steam Profile ... "
+    putStrLn "Type "
 
 main = do
     jsonFormat <- simpleHttp stdURL
     let parsed = decode jsonFormat :: Maybe JSONResponse
     case parsed of 
         Just value -> case value of
-            JSONResponse value -> return $ gameCount value
-
+            JSONResponse value -> return value
 {- 
     Compile / Runtime Instructions: 
     ---------------------
