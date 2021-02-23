@@ -11,7 +11,7 @@ main = do
     putStrLn ""
     putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
     putStrLn ""
-    extractFromJSON userURL
+    returnFromJSON userURL
     
 {- 
     Compile / Runtime Instructions: 
