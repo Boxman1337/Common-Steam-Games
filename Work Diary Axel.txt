@@ -2,7 +2,7 @@ Axel Nilsson Work Diary
 
 14 February 13:00 -- 15:14 :
 Set up the project directory through Stack and tested out importing external libraries
- -- Use ‘stack build’ then ‘stack ghci ./app/Main.hs’ to load imported libraries
+Use ‘stack build’ then ‘stack ghci ./app/Main.hs’ to load imported libraries
 
 15 February 14:50 -- 18:50:
 Got comfortable with Stack, imported Data.Aeson, Network.HTTP and removed Text.JSON.
@@ -16,3 +16,7 @@ Added some libraries and started working on parsing JSON from URL with Pavlos an
 
 21-22 February 12:00 -- 01:00, 12:00 -- 15:20
 Researched and messed around with JSON parsing. Created instances for FromJSON to be able to parse our custom data types, i.e ‘JSONResponse’. We are now able to extract certain parts from the parsed JSON from our main function.
+
+23 February 13:00 -- 17:00
+Researched the different libraries and made the software able to return a list containing a users' owned games when provided a valid steam64 adress
+Separated the program into 4 parts, Main.hs, JSONParsing.hs, IDS.hs and KEY.hs
