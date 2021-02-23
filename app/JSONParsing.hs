@@ -3,7 +3,13 @@
 
 module JSONParsing where
 
--- Libraries and modules
+-- Importing modules
+
+import KEY
+import IDS 
+
+-- Importing libraries
+
 import qualified Data.ByteString.Lazy.Char8 as C
 import Network.HTTP.Conduit (simpleHttp)
 import Data.Text hiding (map)
@@ -56,12 +62,6 @@ instance FromJSON Game where
         <*> v .:? "playtime_mac_foreve r"
         <*> v .:? "playtime_2weeks"
 
-apiKey :: String
-apiKey = "0786DE3A3F9117713096BAE4347B357A"
-
-axelSteam :: String
-axelSteam = "76561198068497293"
-
 createURL :: String -> String
 createURL steam64 = ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
@@ -70,13 +70,10 @@ returnFromJSON url = do
     retrieved <- simpleHttp url
     let parsed = eitherDecode retrieved :: Either String JSONResponse
     case parsed of 
-        Left err -> putStrLn err
-        Right response -> extractFromJSON response
+        Left error -> putStrLn error
+        Right response -> case response of
+            JSONResponse v -> 
+                let usersOwnedGames = map nameGame (listOfGames v) 
+                in print usersOwnedGames
 
-extractFromJSON :: JSONResponse -> IO ()
-extractFromJSON response = 
-    case response of
-        JSONResponse v -> 
-            let usersOwnedGames = map nameGame (listOfGames v) 
-            in print usersOwnedGames
 
