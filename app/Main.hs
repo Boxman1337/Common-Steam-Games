@@ -59,25 +59,33 @@ instance FromJSON Game where
 apiKey :: String
 apiKey = "0786DE3A3F9117713096BAE4347B357A"
 
+axelSteam :: String
+axelSteam = "76561198068497293"
+
 stdURL :: String
-stdURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true"
+stdURL = createURL axelSteam
 
 getJSON :: IO C.ByteString
 getJSON = simpleHttp stdURL
 
-createURL apiKey steam64 = do
-    return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
+createURL :: String -> String
+createURL steam64 = ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
-inputLoop = forever $ do
-    putStrLn "Type a valid Steam64 to a public Steam Profile ... "
-    putStrLn "Type "
+extractFromJSON :: String -> IO ()
+extractFromJSON url = do
+    retrieved <- simpleHttp url
+    let parsed = eitherDecode retrieved :: Either String JSONResponse
+    case parsed of 
+        Left err -> putStrLn err
+        Right v -> print v
+
 
 main = do
-    jsonFormat <- simpleHttp stdURL
-    let parsed = decode jsonFormat :: Maybe JSONResponse
-    case parsed of 
-        Just value -> case value of
-            JSONResponse value -> return value
+    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
+    inputID <- getLine
+    let userURL = createURL $ show inputID
+    extractFromJSON userURL
+    
 {- 
     Compile / Runtime Instructions: 
     ---------------------
