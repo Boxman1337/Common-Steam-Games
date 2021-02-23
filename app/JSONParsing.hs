@@ -9,6 +9,7 @@ import Network.HTTP.Conduit (simpleHttp)
 import Control.Monad
 import Data.Aeson
 import Data.Text
+import Debug.Trace
 
 data JSONResponse = JSONResponse
     { userResponse :: UserResponse

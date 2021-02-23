@@ -3,12 +3,14 @@ module Main where
 -- Libraries and modules
 import JSONParsing
 
-
 main :: IO ()
 main = do
     putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
     inputID <- getLine
-    let userURL = createURL $ show inputID
+    let userURL = createURL $ inputID
+    putStrLn ""
+    putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
+    putStrLn ""
     extractFromJSON userURL
     
 {- 
