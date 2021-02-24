@@ -20,3 +20,6 @@ Researched and messed around with JSON parsing. Created instances for FromJSON t
 23 February 13:00 -- 17:00
 Researched the different libraries and made the software able to return a list containing a users' owned games when provided a valid steam64 adress
 Separated the program into 4 parts, Main.hs, JSONParsing.hs, IDS.hs and KEY.hs
+
+24 February 10:00 -- 11:30 
+Tweaked the returnFromJSON function so the returned value can be saved to pure variables for future comparisons

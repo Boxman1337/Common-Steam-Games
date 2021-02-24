@@ -65,15 +65,15 @@ instance FromJSON Game where
 createURL :: String -> String
 createURL steam64 = ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
-returnFromJSON :: String -> IO ()
+returnFromJSON :: String -> IO [String]
 returnFromJSON url = do
     retrieved <- simpleHttp url
     let parsed = eitherDecode retrieved :: Either String JSONResponse
     case parsed of 
-        Left error -> putStrLn error
+        Left error -> return [error]
         Right response -> case response of
             JSONResponse v -> 
                 let usersOwnedGames = map nameGame (listOfGames v) 
-                in print usersOwnedGames
+                in return (map unpack usersOwnedGames)
 
 
