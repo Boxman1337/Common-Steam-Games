@@ -2,7 +2,7 @@ module Main where
 
 -- Libraries and modules
 import JSONParsing
-
+import Data.List
 main = do
     putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
     inputID <- getLine
@@ -13,7 +13,17 @@ main = do
     user1 <- returnFromJSON userURL
     let pureList = user1
     print pureList
-    
+
+
+ex = ["A Plague Tale: Innocence","Age of Empires II","ARK: Survival Evolved ", "Arma 3", "Assassin's Creed Odyssey", "BATTLETECH","BONEWORKS"]
+
+ex1 = Prelude.drop 2 ex
+ex2 = Prelude.drop 4 ex
+lex3 = ex : ex1 :  ex2 : []
+lilintoc [] = []
+lilintoc (x:(y:[])) = (Data.List.intersect x y) 
+lilintoc (x:[]) = x
+lilintoc (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (lilintoc ys)
 {- 
     Compile / Runtime Instructions: 
     ---------------------
