@@ -26,6 +26,8 @@ dependencies:
 - HTTP
 - bytestring
 - http-conduit
+- text
+- vector
 
 library:
   source-dirs: src

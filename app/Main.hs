@@ -1,7 +1,6 @@
 {-#LANGUAGE DeriveGeneric#-}
 {-# LANGUAGE OverloadedStrings #-}
 
-
 module Main where
 
 -- Libraries
@@ -9,10 +8,9 @@ import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Lazy.Char8 as C
 import Data.Aeson
 import Network.HTTP.Conduit
-import Control.Applicative{-os�ker-}
-import Control.Monad{-os�ker-}
 import GHC.Generics
 import Data.Text
+import Data.List
 
 
 data User =
@@ -20,6 +18,11 @@ data User =
          , steam64 :: String
          , ownedGames :: [String]
          } deriving (Show)
+
+
+data JSONResponse = JSONResponse
+    { userResponse :: UserResponse
+    } deriving (Show)
 
 
 data UserResponse = UserResponse
@@ -43,26 +46,10 @@ data Game = Game
 
 
 
-data GamesList =
-  GamesList {game_count :: Int
-            , games :: [Game] deriving (Show,Generic)
+instance FromJSON JSONResponse where
+    parseJSON (Object v) = JSONResponse
+        <$> v .: "response"
 
-data Rep =
-  Rep {response :: GamesList} deriving (Show,Generic)
-
-
-
-data Haks = Haks [Int] deriving (Show,Generic)
-
-
-
-
-instance FromJSON Main.Rep
-instance ToJSON Main.Rep
-
-
-instance FromJSON GamesList
-instance ToJSON GamesList
 
 instance FromJSON UserResponse where
     parseJSON (Object v) = UserResponse
@@ -108,21 +95,25 @@ tst = do
 
 
 
-main = do
+mainj = do
     putStrLn "Enter a steam64 id:"
     stId <- getLine
-    if stId == "no"
-      then do
-        main
-        else getJSON2
+    if stId == "no" then do
+      mainj
+        else do
+      getJSON2
 
 getSteam64  :: String -> String
 getSteam64 "" =  ""
 getSteam64 s = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=" ++ s  ++  "&include_played_free_games=true&include_appinfo=true"
 
 
+
 apiKey :: String
 apiKey = "0786DE3A3F9117713096BAE4347B357A"
+
+stdURL :: String
+stdURL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true"
 
 createURL = do
     putStrLn "Enter a valid Steam64 to a public Steam Profile ..."
@@ -130,6 +121,16 @@ createURL = do
     putStrLn ("You entered '" ++ steam64 ++ "'")
     return ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
+getJSON :: IO C.ByteString
+getJSON = simpleHttp stdURL
+
+
+main = do
+    jsonFormat <- simpleHttp stdURL
+    let parsed = decode jsonFormat :: Maybe JSONResponse
+    case parsed of 
+        Just value -> case value of
+            JSONResponse value -> return $ listOfGames value
 
 
 {- 
@@ -156,7 +157,7 @@ createURL = do
         Skriva en main som frågar efter steam64 och ger tillbaka en lista av ägda spel
         1) Få tillbaka en URL till Steams API från ett steam64-id
 
-        lådan 64: 76561198068497293
+        L�dan 64: 76561198068497293
         URL: http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=0786DE3A3F9117713096BAE4347B357A&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true
         
         2) Ansluta till URL och få tillbaka en JSON-sträng/fil
@@ -173,9 +174,11 @@ createURL = do
     References: 
     ---------------------
     
-    https://stackoverflow.com/questions/29941866/parsing-json-data-from-a-url-in-haskell-using-aeson
-    https://hackage.haskell.org/package/http-conduit-2.3.7.4/docs/Network-HTTP-Conduit.html
-    https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
+    https://stackoverflow.com/questions/29941866/parsing-json-data-from-a-url-in-haskell-using-aeson (Accessed 14 Feb)
+    https://hackage.haskell.org/package/http-conduit-2.3.7.4/docs/Network-HTTP-Conduit.html (Accessed 15 Feb)
+    https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json (Accessed 15 Feb)
+    https://artyom.me/aeson (Accessed 18 Feb)
+    https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
 
 -}
 

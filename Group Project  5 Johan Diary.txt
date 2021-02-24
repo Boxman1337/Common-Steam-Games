@@ -1,0 +1,9 @@
+9/2 - 40 minutes: Wrote group rules together with Axel and Pavlos.
+11/2 - 40 minutes: I researched JSON-files and JSON parsing, since we will have to use these methods in our project.
+16/2 - 30 minutes: Me, Axel and Pavlos had a meeting with our TA, where we recieved some advice and general instructions.
+16/2 - 50 minutes: I researched how to parse JSON-files with Axel, and we managed to install the Bytestring package via Cabal.
+Since it was neccesary in order to parse with Aeson.
+18/2 - 60 minutes: I sat in a call with Pavlos and Axel, where we discussed our progress on the project. Additionally, me and Axel assisted Pavlos getting his libraries to work, which we did after a little while.
+We also discussed our findings on how to work with the Aeson package and the Generic package. We also expermented with it, in order to obtain a better understanding.
+19/2 - 40 minutes: I read up on how to parse JSON-files with the Aeson package. I obtained some useful information on one guide, and I applied some of that new knowledge to my Haskell file.
+22/2 - 2 hours: I examined Axel's progress on the datatypes and his successful attempt at parsing the JSON-file. After that I began working on a function that returns the common games, represented by a list of string.
