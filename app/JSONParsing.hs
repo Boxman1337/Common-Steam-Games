@@ -13,8 +13,8 @@ import IDS
 import qualified Data.ByteString.Lazy.Char8 as C
 import Network.HTTP.Conduit (simpleHttp)
 import Data.Text hiding (map)
-import Control.Monad
 import Data.Aeson
+import Control.Monad
 
 data JSONResponse = JSONResponse
     { userResponse :: UserResponse
