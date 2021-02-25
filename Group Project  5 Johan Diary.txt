@@ -7,4 +7,4 @@ Since it was neccesary in order to parse with Aeson.
 We also discussed our findings on how to work with the Aeson package and the Generic package. We also expermented with it, in order to obtain a better understanding.
 19/2 - 40 minutes: I read up on how to parse JSON-files with the Aeson package. I obtained some useful information on one guide, and I applied some of that new knowledge to my Haskell file.
 22/2 - 2 hours: I examined Axel's progress on the datatypes and his successful attempt at parsing the JSON-file. After that I began working on a function that returns the common games, represented by a list of string.
-24/2 - 30 minutes: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great!
+24/2 - 30 minutes: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great! Pavlos wrote a function that utilized the intersection function in Data.List. It proved to exactly what we were looking for, so it was implemented in Main.hs.
