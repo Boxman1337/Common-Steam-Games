@@ -1,0 +1,4 @@
+9/2 - The group wrote rules for this project together.
+16/2 - We had our meeting with our assistant. He told us some general advice and we explained our project idea to  him.
+18/2 - The group had a meeting discussing how everybody where progressing. The group also made sure that the packages and libraries properly worked on each member's computer. The group additionally discussed their findings on how the Aeson package works. Since the idea was to utilize this package in order to Parse Steam's JSON-file.
+24/2 -  The  group had another meeting where they updated each other on their progress. Johan got some help with creating a function that finds the common elements in an undefined amount of lists.
