@@ -1,10 +1,21 @@
 9/2 - 40 minutes: Wrote group rules together with Axel and Pavlos.
 11/2 - 40 minutes: I researched JSON-files and JSON parsing, since we will have to use these methods in our project.
 16/2 - 30 minutes: Me, Axel and Pavlos had a meeting with our TA, where we recieved some advice and general instructions.
-16/2 - 50 minutes: I researched how to parse JSON-files with Axel, and we managed to install the Bytestring package via Cabal.
-Since it was neccesary in order to parse with Aeson.
+16/2 - 60 minutes: I researched how to parse JSON-files with Axel, and we managed to install the Bytestring package via Cabal.
+Since it was neccesary in order to parse with Aeson. We had a look at these sites: https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
+https://hackage.haskell.org/package/aeson-1.5.5.1/docs/Data-Aeson.html
+17/2 - 60 minutes: I followed the aforementioned guide on schoolofhaskell.com. I gave me a better understanding on how to parse files from the internet. Although, I could not get the FromJSON and ToJSON instances to properly work with the Steam API.
 18/2 - 60 minutes: I sat in a call with Pavlos and Axel, where we discussed our progress on the project. Additionally, me and Axel assisted Pavlos getting his libraries to work, which we did after a little while.
 We also discussed our findings on how to work with the Aeson package and the Generic package. We also expermented with it, in order to obtain a better understanding.
-19/2 - 40 minutes: I read up on how to parse JSON-files with the Aeson package. I obtained some useful information on one guide, and I applied some of that new knowledge to my Haskell file.
-22/2 - 2 hours: I examined Axel's progress on the datatypes and his successful attempt at parsing the JSON-file. After that I began working on a function that returns the common games, represented by a list of string.
-24/2 - 30 minutes: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great!
+19/2 - 60 minutes: I read up on how to parse JSON-files with the Aeson package. I obtained some useful information on one guide, and I applied some of that new knowledge to my Haskell file.
+20/2 - 1.5 hours: I continued to work with Aeson. I wrote some data types for our project. The data types had to resemble Steam's JSON-file, so I made sure it was correctly done.
+Three data types in total had to be written. 
+22/2 - 2 hours: I examined Axel's progress on the JSON instances and his successful attempt at parsing the JSON-file. After that I began working on a function that returns the common games, represented by a list of string.
+23/2 - 3 hours: I continued to work on my list function. I came up with two possible solutions, the first compares two lists at a time and the second counts how many times a game occurrs in a concated list of owned games.
+I ended up getting stuck on the first solution so I moved on to the second one. I got pretty far on it, but I got stuck on the final function.
+24/2 - 90 minutes: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great! Pavlos wrote a function that utilized the intersection function in Data.List. 
+It proved to exactly what we were looking for, so it was implemented in Main.hs. Later in the day, I worked on the rapport.
+25/2 - 60 minutes: I examined how far Axel and Pavlos had gotten on the project. I read through their code in detail in order to fully grasp their implementation. I later began to describe the program in the report.
+26/2 - 5 hours: I worked on the report and had a look on previous student's works in order to get a good idea for the structure of it. Later, we had our meeting with the TA, where he gave some suggestions on how to make our program more comprehensive.
+Directly afterwards, we held a meeting discussing which new functions we should try and implement and how to divide the tasks between us. Then I began working on my assigned task. Which is creating a textfile containing the common games. This is going well so far.
+I used writeFile.
