@@ -1,4 +1,4 @@
-9/2 - 40 minutes: Wrote group rules together with Axel and Pavlos.
+9/2 - 2 hours: Wrote group rules together with Axel and Pavlos.
 11/2 - 40 minutes: I researched JSON-files and JSON parsing, since we will have to use these methods in our project.
 16/2 - 30 minutes: Me, Axel and Pavlos had a meeting with our TA, where we recieved some advice and general instructions.
 16/2 - 60 minutes: I researched how to parse JSON-files with Axel, and we managed to install the Bytestring package via Cabal.
