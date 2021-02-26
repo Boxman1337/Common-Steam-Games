@@ -24,3 +24,6 @@ I tried looking for solutions on how to extract game names from the json file wi
 Axel managed to finish the function to get a list of games owned by the steam64. I created a function that would take a list of lists and then return all of the elements common in all of the lists.
 I then worked on implementing the function into the json parser that axel created, however it proved to be hard because of the recursion that was required to be created along with my lack of knowledge of working around IO functions.
 after about an hour of work i succeeded in creating a recursion that would allow the user to compare as many steam64s as they wanted. This meant that our program was done and working. Now we just need to add specifications and maybe rename some functions add comments etc.
+
+26th of february (3 hours)
+I spent time writing on the report, then had the meeting with the TA.
