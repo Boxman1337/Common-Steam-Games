@@ -13,14 +13,14 @@ main = do
     inputID <- getLine
     let userURL = createURL $ inputID
     putStrLn ""
-    putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
+    putStrLn ("Gathering information on " ++ inputID)
     putStrLn ""
     usergames <- returnFromJSON userURL
     let pureList = usergames
-    print pureList
+    print "ID is valid!"
 
     putStrLn ""
-    putStrLn "If you want to compare the following lists, type 'True' "
+    putStrLn "If you want to compare the following lists, type 'True' otherwise, type 'False' "
     putStrLn ""
     confirmation <- getLine
     if confirmation == "True"
@@ -34,18 +34,21 @@ test acc = do
     inputID <- getLine
     let userURL = createURL $ inputID
     putStrLn ""
-    putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
+    putStrLn ("Gathering information on " ++ inputID)
     putStrLn ""
     usergames <- returnFromJSON userURL
     let all = Data.List.insert usergames acc
-    print all
+    putStrLn "IDs are valid!"
     putStrLn ""
     putStrLn "If you want to compare the following lists, type 'True' "
     putStrLn ""
     confirmation <- getLine
     if confirmation == "True"
-        then
+        then do
             print  (lilintoc (all))
+            putStrLn "Enter a file name"
+            fileName <- getLine
+            writeFile (fileName ++ ".txt") $ show $ lilintoc (all)
         else
             test all
 
@@ -54,6 +57,7 @@ lilintoc [] = []
 lilintoc (x:(y:[])) = (Data.List.intersect x y) 
 lilintoc (x:[]) = x
 lilintoc (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (lilintoc ys)
+
 
 {- 
     Compile / Runtime Instructions: 
