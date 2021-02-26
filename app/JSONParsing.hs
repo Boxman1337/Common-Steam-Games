@@ -59,7 +59,7 @@ instance FromJSON Game where
         <*> v .:? "playtime_mac_forever"
         <*> v .:? "playtime_linux_forever"
         <*> v .:? "has_community_visible_stats"
-        <*> v .:? "playtime_mac_foreve r"
+        <*> v .:? "playtime_mac_forever"
         <*> v .:? "playtime_2weeks"
 
 createURL :: String -> String

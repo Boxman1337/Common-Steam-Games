@@ -1,0 +1,26 @@
+9th of february (2 hours)
+Me, Axel and Johan decided to start a call where we talked about group rules for about 2 hours. We created git and wrote down our rules
+
+16th of february (1 hours 30 minutes)
+Me, Axel and Johan had a meeting with our TA. We got a thumbs up meaning that we could start working on the project. After the meeting me and my group discussed how we are going to approach this.
+
+18th of february (4 hours)
+I start by researching how to work around APIs and try to figure out how we can create a program that asks for a steam key, and with that somehow get a list of all the games owned by that steam user.
+After a while, Axel and Johan joined me and we worked together. We succeeded in "downloading" the information from the steam api and we now are able to get a large string with all games and some more info.
+What we now have to do is filter the games and add them to a list that we are then going to compare with the other users. 
+
+20th of february (1 hour 30 minutes)
+I started reading into json in order to learn about coverting what we downloaded it into something we can use for our program however i felt it wasnt anything we could use.
+
+22nd of february (4 hours)
+Coms with team cause apparently we were not thinking about how to create the program the same way. 
+Things also became kinda weird cause we never really divided the program, so everything i thought of doing, Johan and Axel were already working on, so i decided to ask what i should do and i was told to try and help with the json parsing Axel was working on.
+it feels like everything in our program is easy except for that one thing. I tried multiple different things and none of them worked. I got tired and gave up and instead started writing on the report.
+
+23rd of february (5 hours)
+I tried looking for solutions on how to extract game names from the json file with no success. I messaged the other person working on this and told him that i have no clue how to do this. instead i continued writing on the report
+
+24th of february (5 hours)
+Axel managed to finish the function to get a list of games owned by the steam64. I created a function that would take a list of lists and then return all of the elements common in all of the lists.
+I then worked on implementing the function into the json parser that axel created, however it proved to be hard because of the recursion that was required to be created along with my lack of knowledge of working around IO functions.
+after about an hour of work i succeeded in creating a recursion that would allow the user to compare as many steam64s as they wanted. This meant that our program was done and working. Now we just need to add specifications and maybe rename some functions add comments etc.
