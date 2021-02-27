@@ -25,11 +25,11 @@ inputLoop acc = do
     -- Prompts the user to input a steam64
 
     inputID <- getLine
-    let userURL = createURL $ inputID
+    let userURL = ownedGamesURL $ inputID
     
     -- Calling returnFromJSON with the steam64
 
-    usergames <- returnFromJSON userURL
+    usergames <- gamesFromJSON userURL
     let steamIDS = Data.List.insert usergames acc
 
     -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
