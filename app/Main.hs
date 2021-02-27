@@ -1,4 +1,4 @@
-module Main (main, inputLoop, commonGames) where
+module Main (main, inputLoop, commonGames, createTxt) where
 
 -- Importing modules
 
@@ -21,8 +21,8 @@ createTxt returnedList = do
     hPutStrLn file $ "Common Steam Games"
     hPutStrLn file $ "------------------"
     hPutStrLn file $ ""
-    
     hPutStrLn file $ unlines returnedList
+    
     hClose file
 
 
@@ -51,7 +51,6 @@ inputLoop acc = do
 
     putStrLn ""
     putStrLn "If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else. "
-    putStrLn ""
 
     confirmation <- getLine
 
