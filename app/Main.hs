@@ -71,9 +71,6 @@ inputLoop acc = do
 
 -- Pure functions
 
-
-ali = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=0786DE3A3F9117713096BAE4347B357A&steamids=76561198046588035"
-
 commonGames :: [[String]] -> [String]
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
