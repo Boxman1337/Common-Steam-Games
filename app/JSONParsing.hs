@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module JSONParsing (GamesResponse, UserGamesResponse, Game, SummaryResponse, UserSummaryResponse, Player, ownedGamesURL, gamesFromJSON) where
+module JSONParsing (GamesResponse, UserGamesResponse, Game, SummaryResponse, UserSummaryResponse, Player, ownedGamesURL, gamesFromJSON, aliasURL, aliasFromJSON) where
 
 -- Importing modules
 
