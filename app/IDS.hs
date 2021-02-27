@@ -1,4 +1,4 @@
-module IDS where
+module IDS (axelID, johanID, pavlosID) where
 
 -- Steam64's
 

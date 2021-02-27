@@ -1,4 +1,4 @@
-module Main where
+module Main (main, inputLoop, commonGames) where
 
 -- Importing modules
 
@@ -8,52 +8,59 @@ import JSONParsing
 
 import Data.List
 
-main = do
-    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
-    inputID <- getLine
-    let userURL = createURL $ inputID
-    putStrLn ""
-    putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
-    putStrLn ""
-    usergames <- returnFromJSON userURL
-    let pureList = usergames
-    print pureList
+-- IO Functions
 
-    putStrLn ""
-    putStrLn "If you want to compare the following lists, type 'True' "
-    putStrLn ""
-    confirmation <- getLine
-    if confirmation == "True"
-        then
-            print  (lilintoc pureList)
-        else
-            test ([pureList])
+main :: IO ()
+main = do 
+    putStrLn "Welcome!"
+    inputLoop []
 
-test acc = do 
+inputLoop :: [[String]] -> IO ()
+inputLoop acc = do 
+    
+    putStrLn ""
     putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
+    putStrLn ""
+
+    -- Prompts the user to input a steam64
+
     inputID <- getLine
     let userURL = createURL $ inputID
-    putStrLn ""
-    putStrLn ("Calling extractFromJSON with URL: " ++ userURL)
-    putStrLn ""
+    
+    -- Calling returnFromJSON with the steam64
+
     usergames <- returnFromJSON userURL
-    let all = Data.List.insert usergames acc
-    print all
+    let steamIDS = Data.List.insert usergames acc
+
+    -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
+
     putStrLn ""
-    putStrLn "If you want to compare the following lists, type 'True' "
+    putStrLn "If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else. "
     putStrLn ""
+
     confirmation <- getLine
-    if confirmation == "True"
+    if (confirmation == "True" || confirmation == "true")
         then
-            print  (lilintoc (all))
+
+    -- Check if steamIDS only contain a set of owned games for one person 
+    -- or if the multiple steam users dont have any games in common 
+
+            let returnedList = commonGames steamIDS in 
+                if (returnedList == []) 
+                    then putStrLn "No common games were found ... "
+                    else print returnedList
+
         else
-            test all
+            inputLoop steamIDS
 
+-- Pure functions
 
-lilintoc [] = []
-lilintoc (x:(y:[])) = (Data.List.intersect x y) 
-lilintoc (x:[]) = x
-lilintoc (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (lilintoc ys)
+commonGames :: [[String]] -> [String]
+commonGames [] = []
+commonGames (x:(y:[])) = (Data.List.intersect x y) 
+commonGames (x:[]) = x
+commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGames ys)
+
 
 {- 
     Compile / Runtime Instructions: 

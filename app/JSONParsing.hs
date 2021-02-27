@@ -1,7 +1,6 @@
-{-# LANGUAGE DeriveGeneric #-} 
 {-# LANGUAGE OverloadedStrings #-}
 
-module JSONParsing where
+module JSONParsing (JSONResponse, UserResponse, Game, createURL, returnFromJSON) where
 
 -- Importing modules
 
@@ -71,9 +70,8 @@ returnFromJSON url = do
     let parsed = eitherDecode retrieved :: Either String JSONResponse
     case parsed of 
         Left error -> return [error]
-        Right response -> case response of
-            JSONResponse v -> 
-                let usersOwnedGames = map nameGame (listOfGames v) 
-                in return (map unpack usersOwnedGames)
+        Right (JSONResponse v) ->
+            let usersOwnedGames = map nameGame (listOfGames v) 
+            in return (map unpack usersOwnedGames)
 
 
