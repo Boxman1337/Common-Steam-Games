@@ -8,11 +8,13 @@ import JSONParsing
 
 import Data.List
 import System.IO
+import GHC.IO.Encoding
 
 -- IO Functions
 
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
+    setLocaleEncoding utf8
     writeFile ("CommonGames.txt") ""
     file <- openFile "CommonGames.txt" WriteMode
     
