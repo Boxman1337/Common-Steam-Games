@@ -63,6 +63,8 @@ inputLoop acc = do
                 if (returnedList == []) 
                     then putStrLn "No common games were found ... "
                     else do
+                          putStrLn "These are the common games"
+                          putStrLn "-----------------------------------------------------------------"
                           createTxt returnedList
                           putStrLn $ unlines $ returnedList
 
@@ -71,7 +73,18 @@ inputLoop acc = do
 
 -- Pure functions
 
-commonGames :: [[String]] -> [String]
+
+{- commonGames ListofLists
+   takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
+   PRE: -
+   RETURNS: a list with all the common elements inside the lists within the ListofLists
+   SIDE-EFFECTS: -
+   EXAMPLES:
+   commonGames [[1,2,3],[1],[2],[3]]     => []
+   commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
+   commonGames [[1,2,3]] => [1,2,3]
+-}
+commonGames :: Eq a => [[a]] -> [a]
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
 commonGames (x:[]) = x
