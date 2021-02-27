@@ -7,25 +7,33 @@ import JSONParsing
 -- Importing Libraries
 
 import Data.List
-
+import System.IO
 
 -- IO Functions
 
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
-    writeFile ("CommonGames.txt") $ show $ returnedList
+    writeFile ("CommonGames.txt") ""
+    file <- openFile "CommonGames.txt" WriteMode
+    
+    hPutStrLn file $ "Common Steam Games"
+    hPutStrLn file $ "------------------"
+    hPutStrLn file $ ""
+    
+    hPutStrLn file $ unlines returnedList
+    hClose file
 
 
 main :: IO ()
 main = do 
+    putStrLn ""
     putStrLn "Welcome!"
     inputLoop []
 
 inputLoop :: [[String]] -> IO ()
 inputLoop acc = do 
     putStrLn ""
-    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
-    putStrLn ""
+    putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
 
     -- Prompts the user to input a steam64
 
@@ -44,6 +52,7 @@ inputLoop acc = do
     putStrLn ""
 
     confirmation <- getLine
+
     if (confirmation == "True" || confirmation == "true")
         then
 
