@@ -62,7 +62,7 @@ data Player = Player
     , avatarhashPlayer :: Text
     , lastlogoffPlayer :: Int
     , personastatePlayer :: Int
-    , realnamePlayer :: Text
+    , realnamePlayer :: Maybe Text
     , primaryclanidPlayer :: Text
     , timecreatedPlayer :: Int
     , personastateflagsPlayer :: Int
@@ -118,7 +118,7 @@ instance FromJSON Player where
         <*> v .: "avatarhash"
         <*> v .: "lastlogoff"
         <*> v .: "personastate"
-        <*> v .: "realname"
+        <*> v .:? "realname"
         <*> v .: "primaryclanid"
         <*> v .: "timecreated"
         <*> v .: "personastateflags"
