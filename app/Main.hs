@@ -11,7 +11,6 @@ import System.IO
 import GHC.IO.Encoding
 
 -- IO Functions
-
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
     setLocaleEncoding utf8
@@ -63,12 +62,17 @@ inputLoop acc = do
             let returnedList = commonGames steamIDS in 
                 if (returnedList == []) 
                     then putStrLn "No common games were found ... "
-                    else createTxt returnedList
+                    else do
+                          createTxt returnedList
+                          putStrLn $ unlines $ returnedList
 
         else
             inputLoop steamIDS
 
 -- Pure functions
+
+
+ali = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=0786DE3A3F9117713096BAE4347B357A&steamids=76561198046588035"
 
 commonGames :: [[String]] -> [String]
 commonGames [] = []
