@@ -10,18 +10,11 @@ import Data.List
 
 
 -- IO Functions
-{-
-main = do
-    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
-    inputID <- getLine
-    let userURL = createURL $ inputID
-    putStrLn ""
-    putStrLn ("Gathering information on " ++ inputID)
-    putStrLn ""
-    usergames <- returnFromJSON userURL
-    let pureList = usergames
-    print "ID is valid!"
--}
+
+createTxt :: [String] -> IO ()
+createTxt returnedList = do
+    writeFile ("CommonGames.txt") $ show $ returnedList
+
 
 main :: IO ()
 main = do 
@@ -30,15 +23,13 @@ main = do
 
 inputLoop :: [[String]] -> IO ()
 inputLoop acc = do 
-    
     putStrLn ""
-    putStrLn "If you want to compare the following lists, type 'True' otherwise, type 'False' "
+    putStrLn "Welcome! Please enter a valid Steam64 to a PUBLIC Steam profile ... "
     putStrLn ""
 
     -- Prompts the user to input a steam64
 
     inputID <- getLine
-
     let userURL = ownedGamesURL $ inputID
     
     -- Calling returnFromJSON with the steam64
@@ -47,16 +38,6 @@ inputLoop acc = do
     let steamIDS = Data.List.insert usergames acc
 
     -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
-
-{-
-    let userURL = createURL $ inputID
-    putStrLn ""
-    putStrLn ("Gathering information on " ++ inputID)
-    putStrLn ""
-    usergames <- returnFromJSON userURL
-    let all = Data.List.insert usergames acc
-    putStrLn "IDs are valid!"
--}
 
     putStrLn ""
     putStrLn "If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else. "
@@ -72,14 +53,7 @@ inputLoop acc = do
             let returnedList = commonGames steamIDS in 
                 if (returnedList == []) 
                     then putStrLn "No common games were found ... "
-                    else print returnedList
-
-    if confirmation == "True"
-        then do
-            print  (lilintoc (all))
-            putStrLn "Enter a file name"
-            fileName <- getLine
-            writeFile (fileName ++ ".txt") $ show $ lilintoc (all)
+                    else createTxt returnedList
 
         else
             inputLoop steamIDS
