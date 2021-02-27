@@ -84,7 +84,7 @@ inputLoop acc = do
    commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
    commonGames [[1,2,3]] => [1,2,3]
 -}
-commonGames :: [[String]] -> [String]
+commonGames :: Eq a => [[a]] -> [a]
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
 commonGames (x:[]) = x
