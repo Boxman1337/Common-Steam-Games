@@ -19,3 +19,5 @@ It proved to exactly what we were looking for, so it was implemented in Main.hs.
 26/2 - 5 hours: I worked on the report and had a look on previous student's works in order to get a good idea for the structure of it. Later, we had our meeting with the TA, where he gave some suggestions on how to make our program more comprehensive.
 Directly afterwards, we held a meeting discussing which new functions we should try and implement and how to divide the tasks between us. Then I began working on my assigned task. Which is creating a textfile containing the common games. This is going well so far.
 I used writeFile.
+27/2 - 3 hours: I looked through Axel's new contributions and decided to expand upon them. I fixed some bugs associated with retrieving Steam usernames and I began to implement a way to print out the users together with the common games. I worked on that for quite a while,
+then I did some work on the report.
