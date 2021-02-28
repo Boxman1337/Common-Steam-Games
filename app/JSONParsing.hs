@@ -66,8 +66,8 @@ data Player = Player
     , primaryclanidPlayer :: Text
     , timecreatedPlayer :: Int
     , personastateflagsPlayer :: Int
-    , loccountrycodePlayer :: Text
-    , locstatecodePlayer :: Text
+    , loccountrycodePlayer :: Maybe Text
+    , locstatecodePlayer :: Maybe Text
     } deriving (Show)
 
 -- Custom FromJSON instances to parse data types for owned games
@@ -122,8 +122,8 @@ instance FromJSON Player where
         <*> v .: "primaryclanid"
         <*> v .: "timecreated"
         <*> v .: "personastateflags"
-        <*> v .: "loccountrycode"
-        <*> v .: "locstatecode"
+        <*> v .:? "loccountrycode"
+        <*> v .:? "locstatecode"
 
 -- Pure functions        
 
