@@ -81,8 +81,8 @@ inputLoop acc acc2 = do
                           putStrLn "The common games for"
                           putStrLn $ getUsers (Data.List.concat aliases) ++ " are:"
                           putStrLn "-----------------------------------------------------------------"
-                          createTxt returnedList
-                          putStrLn $ unlines $ returnedList
+                          createTxt $ Data.List.sort returnedList
+                          putStrLn $ unlines $ Data.List.sort $ returnedList
                           putStrLn "-----------------------------------------------------------------"
 
         else
