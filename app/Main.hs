@@ -78,12 +78,11 @@ inputLoop acc acc2 = do
                 if (returnedList == []) 
                     then putStrLn "No common games were found ... "
                     else do
-                          putStrLn "These are the common games for"
-                          putStrLn $ getUsers (Data.List.concat aliases)
+                          putStrLn "The common games for"
+                          putStrLn $ getUsers (Data.List.concat aliases) ++ " are:"
                           putStrLn "-----------------------------------------------------------------"
                           createTxt returnedList
                           putStrLn $ unlines $ returnedList
-                          
                           putStrLn "-----------------------------------------------------------------"
 
         else
