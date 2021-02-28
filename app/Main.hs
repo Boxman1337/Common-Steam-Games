@@ -7,10 +7,19 @@ import JSONParsing
 -- Importing Libraries
 
 import Data.List
+import Data.Char
 import System.IO
 import GHC.IO.Encoding
 
 -- IO Functions
+{- createTxt list
+   Writes all the games in list to a txt file.
+   PRE: -
+   RETURNS:-
+   SIDE-EFFECTS: A txt file is written, containing all games in list.
+   EXAMPLES:
+
+-}
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
     setLocaleEncoding utf8
@@ -29,22 +38,28 @@ main :: IO ()
 main = do 
     putStrLn ""
     putStrLn "Welcome!"
-    inputLoop []
+    inputLoop [] []
 
-inputLoop :: [[String]] -> IO ()
-inputLoop acc = do 
+inputLoop :: [[String]] -> [[String]] -> IO ()
+inputLoop acc acc2 = do 
     putStrLn ""
     putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
 
     -- Prompts the user to input a steam64
 
     inputID <- getLine
-    let userURL = ownedGamesURL $ inputID
+    let
+      userURL = ownedGamesURL $ inputID
+      nameURL = aliasURL $ inputID 
     
-    -- Calling returnFromJSON with the steam64
-
+    
+    -- Calling gamesFromJSON and aliasFromJSON with the steam64
+    
     usergames <- gamesFromJSON userURL
-    let steamIDS = Data.List.insert usergames acc
+    usernames <- aliasFromJSON nameURL
+    let
+      steamIDS = Data.List.insert usergames acc
+      aliases = Data.List.insert usernames acc2
 
     -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
 
@@ -53,7 +68,7 @@ inputLoop acc = do
 
     confirmation <- getLine
 
-    if (confirmation == "True" || confirmation == "true")
+    if ((map toUpper confirmation) == "TRUE")
         then
 
     -- Check if steamIDS only contain a set of owned games for one person 
@@ -63,19 +78,29 @@ inputLoop acc = do
                 if (returnedList == []) 
                     then putStrLn "No common games were found ... "
                     else do
-                          putStrLn "These are the common games"
+                          putStrLn "These are the common games for"
+                          putStrLn $ getUsers (Data.List.concat aliases)
                           putStrLn "-----------------------------------------------------------------"
                           createTxt returnedList
                           putStrLn $ unlines $ returnedList
+                          
+                          putStrLn "-----------------------------------------------------------------"
 
         else
-            inputLoop steamIDS
+            inputLoop steamIDS aliases
 
 -- Pure functions
+test = do
+  inputID <- getLine
+  let
+    nameURL = aliasURL $ inputID
+    in do
+      username <- aliasFromJSON nameURL
+      putStrLn $ getUsers (username)
 
 
 {- commonGames ListofLists
-   takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
+   Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
    PRE: -
    RETURNS: a list with all the common elements inside the lists within the ListofLists
    SIDE-EFFECTS: -
@@ -90,6 +115,19 @@ commonGames (x:(y:[])) = (Data.List.intersect x y)
 commonGames (x:[]) = x
 commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGames ys)
 
+{- getUsers list
+   Takes a list containing usernames and returns them in a single string.
+   PRE: -
+   RETURNS: A string containing all usernames in list.
+   SIDE-EFFECTS: -
+   EXAMPLES:
+           getUsers ["Gabe"] == "Gabe"
+           getUsers ["Gabe", "Newell"] == "Gabe, Newell"
+-}
+getUsers :: [String] -> String
+getUsers [] = ""
+getUsers [x] = x
+getUsers (x:xs) = x ++ ", " ++  getUsers xs
 
 {- 
     Compile / Runtime Instructions: 
