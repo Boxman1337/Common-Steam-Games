@@ -33,13 +33,27 @@ createTxt returnedList = do
     
     hClose file
 
-
+{- main
+   Starts the program.
+   PRE:-
+   RETURNS:-
+   SIDE-EFFECTS:-
+   EXAMPLES:
+-}
 main :: IO ()
 main = do 
     putStrLn ""
     putStrLn "Welcome!"
     inputLoop [] []
+    
+{- inputLoop gameList userList
+   Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
+   PRE: gameList == [] && userList == []
+   SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
+   RETURNS: The commonly owned games between the given users.
+   EXAMPLES:
 
+-}
 inputLoop :: [[String]] -> [[String]] -> IO ()
 inputLoop acc acc2 = do 
     putStrLn ""

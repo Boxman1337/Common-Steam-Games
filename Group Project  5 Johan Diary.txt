@@ -21,3 +21,5 @@ Directly afterwards, we held a meeting discussing which new functions we should 
 I used writeFile.
 27/2 - 3 hours: I looked through Axel's new contributions and decided to expand upon them. I fixed some bugs associated with retrieving Steam usernames and I began to implement a way to print out the users together with the common games. I worked on that for quite a while,
 then I did some work on the report.
+28/2 - 4 hours: I finished the implementation that prints the usernames of the users. Afterwards I fixed some bugs that occurred when obtaining the names of users with certain settings set on private. Then I worked on the report, I wrote on the structure section. After that
+I made a flow chart that illustrates how the functions communicate with each other. Lastly, I wrote some function specifications in Main.hs. 
