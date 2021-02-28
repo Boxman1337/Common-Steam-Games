@@ -51,21 +51,21 @@ data UserSummaryResponse = UserSummaryResponse
     } deriving (Show)
 
 data Player = Player
-    { steamidPlayer :: Text
-    , communityvisibilitystatePlayer :: Int
-    , profilestatePlayer :: Int
+    { steamidPlayer :: Maybe Text
+    , communityvisibilitystatePlayer :: Maybe Int
+    , profilestatePlayer :: Maybe Int
     , personanamePlayer :: Text
-    , profileurlPlayer :: Text
-    , avatarPlayer :: Text
-    , avatarmediumPlayer :: Text
-    , avatarfullPlayer :: Text
-    , avatarhashPlayer :: Text
-    , lastlogoffPlayer :: Int
-    , personastatePlayer :: Int
+    , profileurlPlayer :: Maybe Text
+    , avatarPlayer :: Maybe Text
+    , avatarmediumPlayer :: Maybe Text
+    , avatarfullPlayer :: Maybe Text
+    , avatarhashPlayer :: Maybe Text
+    , lastlogoffPlayer :: Maybe Int
+    , personastatePlayer :: Maybe Int
     , realnamePlayer :: Maybe Text
-    , primaryclanidPlayer :: Text
-    , timecreatedPlayer :: Int
-    , personastateflagsPlayer :: Int
+    , primaryclanidPlayer :: Maybe Text
+    , timecreatedPlayer :: Maybe Int
+    , personastateflagsPlayer :: Maybe Int
     , loccountrycodePlayer :: Maybe Text
     , locstatecodePlayer :: Maybe Text
     } deriving (Show)
@@ -107,21 +107,21 @@ instance FromJSON UserSummaryResponse where
 
 instance FromJSON Player where
     parseJSON (Object v) = Player
-        <$> v .: "steamid"
-        <*> v .: "communityvisibilitystate"
-        <*> v .: "profilestate"
+        <$> v .:? "steamid"
+        <*> v .:? "communityvisibilitystate"
+        <*> v .:? "profilestate"
         <*> v .: "personaname"
-        <*> v .: "profileurl"
-        <*> v .: "avatar"
-        <*> v .: "avatarmedium"
-        <*> v .: "avatarfull"
-        <*> v .: "avatarhash"
-        <*> v .: "lastlogoff"
-        <*> v .: "personastate"
+        <*> v .:? "profileurl"
+        <*> v .:? "avatar"
+        <*> v .:? "avatarmedium"
+        <*> v .:? "avatarfull"
+        <*> v .:? "avatarhash"
+        <*> v .:? "lastlogoff"
+        <*> v .:? "personastate"
         <*> v .:? "realname"
-        <*> v .: "primaryclanid"
-        <*> v .: "timecreated"
-        <*> v .: "personastateflags"
+        <*> v .:? "primaryclanid"
+        <*> v .:? "timecreated"
+        <*> v .:? "personastateflags"
         <*> v .:? "loccountrycode"
         <*> v .:? "locstatecode"
 
