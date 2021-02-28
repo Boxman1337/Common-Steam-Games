@@ -26,4 +26,9 @@ I then worked on implementing the function into the json parser that axel create
 after about an hour of work i succeeded in creating a recursion that would allow the user to compare as many steam64s as they wanted. This meant that our program was done and working. Now we just need to add specifications and maybe rename some functions add comments etc.
 
 26th of february (3 hours)
-I spent time writing on the report, then had the meeting with the TA.
+I spent time writing on the report, then had the meeting with the TA. We discussed about how our program seemed a bit narrow even tho it wasnt in his opinion. Our TA wanted us to make the results a bit more comprehensible and possibly add a few functions to make it seem more complex. He gave us a bunch of examples on how we could do that. 
+
+27th of february (2 hours)
+I spent time polishing up our code, making it as comprehensible ass possible, i added some specifications, and fixed up a couple of wrongs like the specification on the function that intersects the list. 
+Originally that list would only work if the elements of the list were strings, but i changed it, making it more general.
+Now the function would work no matter the element inside the list. (even tho in reality, this function will only ever get strings in it from the main functions, having it be more general feels better and more complete)
