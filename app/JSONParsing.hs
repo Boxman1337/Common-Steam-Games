@@ -1,11 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module JSONParsing (GamesResponse, UserGamesResponse, Game, SummaryResponse, UserSummaryResponse, Player, ownedGamesURL, gamesFromJSON, aliasURL, aliasFromJSON) where
+module JSONParsing (GamesResponse, UserGamesResponse, Game, SummaryResponse, UserSummaryResponse, Player, 
+                    ownedGamesURL, gamesFromJSON, aliasURL, aliasFromJSON, playtimeFromJSON) where
 
 -- Importing modules
 
 import KEY
-import IDS 
 
 -- Importing libraries
 
@@ -154,4 +154,20 @@ aliasFromJSON url = do
         Right (SummaryResponse v) -> 
             let alias = map personanamePlayer (listOfPlayers v)
             in return (map unpack alias)
+
+playtimeFromJSON :: String -> IO [(String, String)]
+playtimeFromJSON url = do
+    retrieved <- simpleHttp url 
+    let parsed = eitherDecode retrieved :: Either String GamesResponse
+    case parsed of 
+        Left error -> return [(error, "")]
+        Right (GamesResponse v) ->
+            
+            -- unpack $ nameGame g = Returns the name of the game, g and unpacks it to the string data type from the text data type
+            -- (show $ (playtimeForeverGame g) `div` 60) ++ " hours") = Returns the total playtime a user has played the game, g in hours
+
+                let list = map (\g -> (unpack $ nameGame g, (show $ (playtimeForeverGame g) `div` 60) ++ " hours")) (listOfGames v)
+                in return list
+
+            
 

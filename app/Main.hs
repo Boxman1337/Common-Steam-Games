@@ -3,6 +3,7 @@ module Main (main, inputLoop, commonGames, createTxt) where
 -- Importing modules
 
 import JSONParsing
+import IDS 
 
 -- Importing Libraries
 
@@ -10,16 +11,38 @@ import Data.List
 import Data.Char
 import System.IO
 import GHC.IO.Encoding
+import Debug.Trace
 
 -- IO Functions
+
+
+test = do
+  let gameurl = ownedGamesURL axelID
+  let summaryurl = aliasURL axelID
+  playtimes <- playtimeFromJSON gameurl
+  username <- aliasFromJSON summaryurl
+  let mapped = mapAliastoPlaytime playtimes username
+
+  let gameurl2 = ownedGamesURL johanID
+  let summaryurl2 = aliasURL johanID
+  playtimes2 <- playtimeFromJSON gameurl2
+  username2 <- aliasFromJSON summaryurl2
+  let mapped2 = mapAliastoPlaytime playtimes2 username2
+
+  let t = Data.List.sort $ intersectFirst mapped mapped2
+      t2 = Data.List.sort $ intersectFirst mapped2 mapped
+
+  let r = combinePlaytime $ zip t t2
+  print r
+
 {- createTxt list
    Writes all the games in list to a txt file.
    PRE: -
    RETURNS:-
    SIDE-EFFECTS: A txt file is written, containing all games in list.
    EXAMPLES:
-
 -}
+
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
     setLocaleEncoding utf8
@@ -40,6 +63,7 @@ createTxt returnedList = do
    SIDE-EFFECTS:-
    EXAMPLES:
 -}
+
 main :: IO ()
 main = do 
     putStrLn "**********************************"
@@ -53,8 +77,8 @@ main = do
    SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
    RETURNS: The commonly owned games between the given users.
    EXAMPLES:
-
 -}
+
 inputLoop :: [[String]] -> [[String]] -> IO ()
 inputLoop acc acc2 = do 
     putStrLn ""
@@ -72,6 +96,7 @@ inputLoop acc acc2 = do
     
     usergames <- gamesFromJSON userURL
     usernames <- aliasFromJSON nameURL
+
     let
       steamIDS = Data.List.insert usergames acc
       aliases = Data.List.insert usernames acc2
@@ -104,14 +129,6 @@ inputLoop acc acc2 = do
             inputLoop steamIDS aliases
 
 -- Pure functions
-test = do
-  inputID <- getLine
-  let
-    nameURL = aliasURL $ inputID
-    in do
-      username <- aliasFromJSON nameURL
-      putStrLn $ getUsers (username)
-
 
 {- commonGames ListofLists
    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
@@ -123,6 +140,7 @@ test = do
    commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
    commonGames [[1,2,3]] => [1,2,3]
 -}
+
 commonGames :: Eq a => [[a]] -> [a]
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
@@ -142,6 +160,19 @@ getUsers :: [String] -> String
 getUsers [] = ""
 getUsers [x] = x
 getUsers (x:xs) = x ++ ", " ++  getUsers xs
+
+mapAliastoPlaytime :: [(String, String)] -> [String] -> [(String, String)]
+mapAliastoPlaytime [] uName = []
+mapAliastoPlaytime ((gName, gTime):xs) uName = 
+    (gName, (head uName) ++ ": " ++ gTime) : mapAliastoPlaytime xs uName
+
+intersectFirst :: [(String, String)] -> [(String, String)] -> [(String, String)]
+intersectFirst l1 l2 = Data.List.intersectBy (\(x,y) (z,w) -> x == z) l1 l2 
+
+combinePlaytime :: [((String, String),(String, String))] -> [(String, String)]
+combinePlaytime [] = []
+combinePlaytime (((x,y),(_,w)):[]) = [(x, y ++ ", " ++ w)]
+combinePlaytime (((x,y),(_,w)):xs) = (x, y ++ ", " ++ w) : combinePlaytime xs
 
 {- 
     Compile / Runtime Instructions: 
