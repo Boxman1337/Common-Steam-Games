@@ -42,8 +42,9 @@ createTxt returnedList = do
 -}
 main :: IO ()
 main = do 
-    putStrLn ""
-    putStrLn "Welcome!"
+    putStrLn "**********************************"
+    putStrLn "* Welcome to Common Steam Games! *"
+    putStrLn "**********************************"
     inputLoop [] []
     
 {- inputLoop gameList userList
