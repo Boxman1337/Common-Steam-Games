@@ -15,11 +15,11 @@ Three data types in total had to be written.
 I ended up getting stuck on the first solution so I moved on to the second one. I got pretty far on it, but I got stuck on the final function.
 24/2 - 90 minutes: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great! Pavlos wrote a function that utilized the intersection function in Data.List. 
 It proved to exactly what we were looking for, so it was implemented in Main.hs. Later in the day, I worked on the rapport.
-25/2 - 60 minutes: I examined how far Axel and Pavlos had gotten on the project. I read through their code in detail in order to fully grasp their implementation. I later began to describe the program in the report.
+25/2 - 2 hours: I examined how far Axel and Pavlos had gotten on the project. I read through their code in detail in order to fully grasp their implementation. I later began to describe the program in the report.
 26/2 - 5 hours: I worked on the report and had a look on previous student's works in order to get a good idea for the structure of it. Later, we had our meeting with the TA, where he gave some suggestions on how to make our program more comprehensive.
 Directly afterwards, we held a meeting discussing which new functions we should try and implement and how to divide the tasks between us. Then I began working on my assigned task. Which is creating a textfile containing the common games. This is going well so far.
 I used writeFile.
 27/2 - 3 hours: I looked through Axel's new contributions and decided to expand upon them. I fixed some bugs associated with retrieving Steam usernames and I began to implement a way to print out the users together with the common games. I worked on that for quite a while,
 then I did some work on the report.
-28/2 - 4 hours: I finished the implementation that prints the usernames of the users. Afterwards I fixed some bugs that occurred when obtaining the names of users with certain settings set on private. Then I worked on the report, I wrote on the structure section. After that
+28/2 - 5 hours: I finished the implementation that prints the usernames of the users. Afterwards I fixed some bugs that occurred when obtaining the names of users with certain settings set on private. Then I worked on the report, I wrote on the structure section. After that
 I made a flow chart that illustrates how the functions communicate with each other. Lastly, I wrote some function specifications in Main.hs. 
