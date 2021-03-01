@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ba66d308bc0d60aecdeda8225f34563ef8e24c35b6f1163e9c1d4606617497bc
+-- hash: 208758c4d1f43a81912c8a8836779c0e3b771882cc45a2049352309b26256650
 
 name:           CommonSG
 version:        0.1.0.0
@@ -48,6 +48,7 @@ executable CommonSG-exe
       IDS
       JSONParsing
       KEY
+      UserPlaytime
       Paths_CommonSG
   hs-source-dirs:
       app
