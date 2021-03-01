@@ -220,3 +220,12 @@ aliasFromJSON url = do
             let alias = map personanamePlayer (listOfPlayers v)
             in return (map unpack alias)
 
+
+-- TEST CASES
+{-
+test1 = TestCase (assertEqual "for (ownedGamesURL "76561198046588035")" "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=76561198046588035&include_played_free_games=false&include_appinfo=true" (ownedGamesURL "76561198046588035"))
+
+test2 = TestCase (assertEqual "for (aliasURL "76561198046588035")" "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=76561198046588035"" (aliasURL "76561198046588035"))
+
+test3
+-}
