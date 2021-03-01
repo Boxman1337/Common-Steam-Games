@@ -38,3 +38,8 @@ Although i suggested some stuff in our chat today, i spent most of my time writi
 Amongst other stuff, I rewrote the introduction as i felt our last was kind of narrow and pretty straightforward. 
 As it felt kind of bad to just straight up delete our old one, I decided to leave it up and wait for my group to read it so that we, together, could decide if this new one was somewhat more fitting.
 
+3rd of march (5 hours)
+I continued writing on the report. We had a meeting in our group where we basically confirmed what had ben done and what was left . 
+We came to a conclusion that what needed to be done was finish writing the report, write some testcases and check on the specification incase we had missed or forgotten something.
+Personally i thought id spend most of my time on the report, as i feel like that is what requires most of the time right now
+
