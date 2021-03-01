@@ -29,11 +29,17 @@ test = do
   username2 <- aliasFromJSON summaryurl2
   let mapped2 = mapAliastoPlaytime playtimes2 username2
 
-  let t = Data.List.sort $ intersectFirst mapped mapped2
-      t2 = Data.List.sort $ intersectFirst mapped2 mapped
+  let gameurl3 = ownedGamesURL pavlosID
+  let summaryurl3 = aliasURL pavlosID
+  playtimes3 <- playtimeFromJSON gameurl3
+  username3 <- aliasFromJSON summaryurl3
+  let mapped3 = mapAliastoPlaytime playtimes3 username3
 
-  let r = combinePlaytime $ zip t t2
-  print r
+  let userList = [mapped, mapped2, mapped3]
+  
+  let x = intersectPlayers userList
+
+  print x
 
 {- createTxt list
    Writes all the games in list to a txt file.
@@ -185,6 +191,15 @@ combinePlaytime :: [((String, String),(String, String))] -> [(String, String)]
 combinePlaytime [] = []
 combinePlaytime (((x,y),(_,w)):[]) = [(x, y ++ ", " ++ w)]
 combinePlaytime (((x,y),(_,w)):xs) = (x, y ++ ", " ++ w) : combinePlaytime xs
+
+intersectThenMerge :: [(String, String)] -> [(String, String)] -> [(String, String)]
+intersectThenMerge player1 player2 = 
+    let player1List = Data.List.sort $ intersectFirst player1 player2
+        player2List = Data.List.sort $ intersectFirst player2 player1
+    in combinePlaytime $ zip player1List player2List
+
+intersectPlayers :: [[(String, String)]] -> [(String, String)]
+intersectPlayers (x:xs) = foldl intersectThenMerge x xs
 
 {- 
     Compile / Runtime Instructions: 
