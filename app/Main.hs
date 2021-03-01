@@ -39,6 +39,9 @@ createTxt returnedList = do
    RETURNS:-
    SIDE-EFFECTS:-
    EXAMPLES:
+             "**********************************"
+             "* Welcome to Common Steam Games! *"
+             "**********************************"
 -}
 main :: IO ()
 main = do 
@@ -53,6 +56,13 @@ main = do
    SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
    RETURNS: The commonly owned games between the given users.
    EXAMPLES:
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           76561198068497293
+           => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
+
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           1
+           => *** Exception: HttpExceptionRequest Request
 
 -}
 inputLoop :: [[String]] -> [[String]] -> IO ()
@@ -104,14 +114,6 @@ inputLoop acc acc2 = do
             inputLoop steamIDS aliases
 
 -- Pure functions
-test = do
-  inputID <- getLine
-  let
-    nameURL = aliasURL $ inputID
-    in do
-      username <- aliasFromJSON nameURL
-      putStrLn $ getUsers (username)
-
 
 {- commonGames ListofLists
    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
