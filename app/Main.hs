@@ -66,6 +66,7 @@ main = do
 
 -}
 inputLoop :: [[String]] -> [[String]] -> IO ()
+--VARIANT: gameList userList
 inputLoop acc acc2 = do 
     putStrLn ""
     putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
@@ -115,7 +116,7 @@ inputLoop acc acc2 = do
 
 -- Pure functions
 
-{- commonGames ListofLists
+{- commonGames listofLists
    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
    PRE: -
    RETURNS: a list with all the common elements inside the lists within the ListofLists
@@ -126,6 +127,7 @@ inputLoop acc acc2 = do
    commonGames [[1,2,3]] => [1,2,3]
 -}
 commonGames :: Eq a => [[a]] -> [a]
+--VARIANT: length listofLists
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
 commonGames (x:[]) = x
@@ -141,6 +143,7 @@ commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGa
            getUsers ["Gabe", "Newell"] == "Gabe, Newell"
 -}
 getUsers :: [String] -> String
+--VARIANT: length list
 getUsers [] = ""
 getUsers [x] = x
 getUsers (x:xs) = x ++ ", " ++  getUsers xs
