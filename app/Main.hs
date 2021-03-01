@@ -111,8 +111,7 @@ inputLoop acc acc2 = do
                           putStrLn $ unlines $ Data.List.sort $ returnedList
                           putStrLn "-----------------------------------------------------------------"
 
-        else
-            inputLoop steamIDS aliases
+        else inputLoop steamIDS aliases
 
 -- Pure functions
 
@@ -192,4 +191,9 @@ getUsers (x:xs) = x ++ ", " ++  getUsers xs
     https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
     https://jsonformatter.org/json-to-haskell (Accessed 22 Feb)
 
+-}
+
+-- TEST CASES
+{-
+test1b = TestCase (assertEqual "for 
 -}
