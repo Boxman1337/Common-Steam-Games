@@ -62,6 +62,9 @@ createTxt returnedList = do
    RETURNS:-
    SIDE-EFFECTS:-
    EXAMPLES:
+             "**********************************"
+             "* Welcome to Common Steam Games! *"
+             "**********************************"
 -}
 
 main :: IO ()
@@ -77,9 +80,17 @@ main = do
    SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
    RETURNS: The commonly owned games between the given users.
    EXAMPLES:
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           76561198068497293
+           => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           1
+           => *** Exception: HttpExceptionRequest Request
+
 -}
 
 inputLoop :: [[String]] -> [[String]] -> IO ()
+--VARIANT: gameList userList
 inputLoop acc acc2 = do 
     putStrLn ""
     putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
@@ -125,12 +136,11 @@ inputLoop acc acc2 = do
                           putStrLn $ unlines $ Data.List.sort $ returnedList
                           putStrLn "-----------------------------------------------------------------"
 
-        else
-            inputLoop steamIDS aliases
+        else inputLoop steamIDS aliases
 
 -- Pure functions
 
-{- commonGames ListofLists
+{- commonGames listofLists
    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
    PRE: -
    RETURNS: a list with all the common elements inside the lists within the ListofLists
@@ -142,6 +152,7 @@ inputLoop acc acc2 = do
 -}
 
 commonGames :: Eq a => [[a]] -> [a]
+--VARIANT: length listofLists
 commonGames [] = []
 commonGames (x:(y:[])) = (Data.List.intersect x y) 
 commonGames (x:[]) = x
@@ -157,6 +168,7 @@ commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGa
            getUsers ["Gabe", "Newell"] == "Gabe, Newell"
 -}
 getUsers :: [String] -> String
+--VARIANT: length list
 getUsers [] = ""
 getUsers [x] = x
 getUsers (x:xs) = x ++ ", " ++  getUsers xs
@@ -218,4 +230,9 @@ combinePlaytime (((x,y),(_,w)):xs) = (x, y ++ ", " ++ w) : combinePlaytime xs
     https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
     https://jsonformatter.org/json-to-haskell (Accessed 22 Feb)
 
+-}
+
+-- TEST CASES
+{-
+test1b = TestCase (assertEqual "for 
 -}

@@ -16,16 +16,29 @@ import Data.Aeson
 import Control.Monad
 
 -- Data types for retrieving owned games
-
+{- GamesResponse
+   GamesResponse represents the overarching layer in the OwnedGames interface from
+   Steam's API, that contains all sub-layers.
+   INVARIANT: -
+-}
 data GamesResponse = GamesResponse
     { userGamesResponse :: UserGamesResponse
     } deriving (Show)
 
+{-  UserGamesResponse
+    UserGamesResponse represents the layer of the OwnedGames interface in Steam's API
+    that contains a list of all games and the number of games.
+    INVARIANT: -
+-}
 data UserGamesResponse = UserGamesResponse
     { gameCount :: Int
     , listOfGames :: [Game]
     } deriving (Show)
 
+{- Game
+   Game represents the data contained with a owned game in the API's OwnedGames interface.
+   INVARIANT: -
+-}
 data Game = Game
     { appidGame :: Int
     , nameGame :: Text
@@ -41,15 +54,28 @@ data Game = Game
     } deriving (Show)
 
 -- Data types for retrieving user summaries
-
+{- SummaryResponse
+   SummaryResponse represents the overarching layer in the GetPlayerSummaries interface from
+   Steam' API, that contains all sub-layers.
+   INVARIANT: -
+-}
 data SummaryResponse = SummaryResponse
     { summary :: UserSummaryResponse
     } deriving (Show)
 
+{- UserSummaryResponse
+   UserSummaryResponse represents the layer containing a list of users and their data in
+   the API's GetPlayerSummaries interface.
+   INVARIANT: -
+-}
 data UserSummaryResponse = UserSummaryResponse
     { listOfPlayers :: [Player]
     } deriving (Show)
 
+{- Player
+   Player represents the data contained of a Steam user in the API's GetPlayerSummaries interface.
+   INVARIANT: -
+-}
 data Player = Player
     { steamidPlayer :: Maybe Text
     , communityvisibilitystatePlayer :: Maybe Int
@@ -70,11 +96,13 @@ data Player = Player
     , locstatecodePlayer :: Maybe Text
     } deriving (Show)
 
+-- All instances below is for decoding the JSON-files' contents into the corresponding custom data type(s).
 -- Custom FromJSON instances to parse data types for owned games
 
 instance FromJSON GamesResponse where
     parseJSON (Object v) = GamesResponse
         <$> v .: "response"
+
 
 instance FromJSON UserGamesResponse where
     parseJSON (Object v) = UserGamesResponse
@@ -125,16 +153,43 @@ instance FromJSON Player where
         <*> v .:? "loccountrycode"
         <*> v .:? "locstatecode"
 
--- Pure functions        
+-- Pure functions
 
+--Note: The API key has been replaced with "apiKey" due to security concerns.
+
+{- ownedGamesURL id
+   Creates a valid URL for Steam's API's GetOwnedGames interface.
+   PRE: id must be a valid Steam64 ID. An available String called apiKey that contains a valid key for Steam's API.
+   SIDE-EFFECTS: -
+   RETURNS: A valid URL for the GetOwnedGames interface containing the user's data.
+   EXAMPLES:
+           ownedGamesURL "76561198068497293" == "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=apiKey&steamid=76561198068497293&include_played_free_games=false&include_appinfo=true"
+-}
 ownedGamesURL :: String -> String
 ownedGamesURL steam64 = ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=" ++ steam64 ++ "&include_played_free_games=false&include_appinfo=true")
 
+{- aliasURL id
+   Creates a valid URL for Steam's API's GetPlayerSummaries interface.
+   PRE: id must be a valid Steam64 ID. An available String called apiKey that contains a valid key for Steam's API.
+   SIDE-EFFECTS: -
+   RETURNS: A valid URL for the GetPlayerSummaries interface containing the user's data.
+   EXAMPLES:
+           aliasURL "76561198068497293" == "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=apiKey&steamids=76561198068497293"
+-}
 aliasURL :: String -> String
 aliasURL steam64 = ("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=" ++ steam64)
 
 -- IO Functions
-
+{- gamesFromJSON url
+   Retrieves the list of owned games of a user from Steam's API.
+   PRE: url must contain a valid API key and a valid Steam64 id.
+   SIDE-EFFECTS: -
+   RETURNS: A list containing a Steam user's owned games.
+   EXAMPLES:
+           gamesFromJSON "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=apiKey&steamid=76561198030522647&include_played_free_games=false&include_appinfo=true" == ["Garry's Mod","Plants vs. Zombies: Game of the Year","Operation Flashpoint: Dragon Rising","Aliens vs. Predator","S.T.A.L.K.E.R.: Call of Pripyat","Terraria","Psychonauts","LIMBO","Amnesia: The Dark Descent","Superbrothers: Sword & Sworcery EP","Pox Nora","Thinking with Time Machine","Moonbase Alpha","Gear Up","Wolfenstein: The New Order","Robocraft","PAYDAY 2"]
+   
+   
+-}
 gamesFromJSON :: String -> IO [String]
 gamesFromJSON url = do
     retrieved <- simpleHttp url
@@ -144,7 +199,17 @@ gamesFromJSON url = do
         Right (GamesResponse v) ->
             let usersOwnedGames = map nameGame (listOfGames v) 
             in return (map unpack usersOwnedGames)
-
+            
+{- aliasFromJSON url
+   Retrieves a user's username from Steam's API.
+   PRE: url must contain a valid API key and a valid Steam64 id.
+   SIDE-EFFECTS: -
+   RETURNS: A Steam user's username.
+   EXAMPLES:
+           aliasFromJSON "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=apiKey&steamids=76561198030522647" == ["the"]
+           aliasFromJSON "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=apiKey&steamids=76561198046588035" == ["Glaus"]
+           
+-}
 aliasFromJSON :: String -> IO [String]
 aliasFromJSON url = do
     retrieved <- simpleHttp url
@@ -171,3 +236,12 @@ playtimeFromJSON url = do
 
             
 
+
+-- TEST CASES
+{-
+test1 = TestCase (assertEqual "for (ownedGamesURL "76561198046588035")" "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=76561198046588035&include_played_free_games=false&include_appinfo=true" (ownedGamesURL "76561198046588035"))
+
+test2 = TestCase (assertEqual "for (aliasURL "76561198046588035")" "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=76561198046588035"" (aliasURL "76561198046588035"))
+
+test3
+-}
