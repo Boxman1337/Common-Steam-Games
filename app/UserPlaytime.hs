@@ -1,4 +1,4 @@
-module UserPlaytime (mapAliastoPlaytime, intersectFirst, combinePlaytime, intersectThenMerge, intersectPlayers) where
+module UserPlaytime (mapAliastoPlaytime, intersectFirst, combinePlaytime, intersectThenMerge, intersectPlayers, tupleListToString) where
 
 -- Importing modules
 
@@ -31,3 +31,7 @@ intersectThenMerge player1 player2 =
 
 intersectPlayers :: [[(String, String)]] -> [(String, String)]
 intersectPlayers (x:xs) = foldl intersectThenMerge x xs
+
+tupleListToString :: [(String, String)] -> [String]
+tupleListToString [] = []
+tupleListToString ((x,y):xs) = (x ++ ": " ++ y) : tupleListToString xs
