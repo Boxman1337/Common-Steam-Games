@@ -34,4 +34,4 @@ intersectPlayers (x:xs) = foldl intersectThenMerge x xs
 
 tupleListToString :: [(String, String)] -> [String]
 tupleListToString [] = []
-tupleListToString ((x,y):xs) = (x ++ ": " ++ y) : tupleListToString xs
+tupleListToString ((x,y):xs) = (x ++ " -- " ++ y) : tupleListToString xs

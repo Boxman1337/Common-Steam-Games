@@ -209,6 +209,7 @@ gamesFromJSON url = do
            aliasFromJSON "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=apiKey&steamids=76561198046588035" == ["Glaus"]
            
 -}
+
 aliasFromJSON :: String -> IO [String]
 aliasFromJSON url = do
     retrieved <- simpleHttp url
