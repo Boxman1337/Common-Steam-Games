@@ -1,4 +1,4 @@
-module IDS (axelID, johanID, pavlosID, ffoxID, topdogID, whipdashID, lolettID, coperniciumID, myID, hampaID, tekannaID, tzeenthID) where
+module IDS (axelID, johanID, pavlosID, ffoxID, topdogID, whipdashID, lolettID, coperniciumID, myID, hampaID, tekannaID, tzeenthID, goatlordID, rebelzer0ID) where
 
 -- Our steam64's
 
@@ -39,4 +39,10 @@ tekannaID = "76561198397768547"
 
 tzeenthID :: String
 tzeenthID = "76561198058394615"
+
+goatlordID :: String
+goatlordID = "76561198069500987"
+
+rebelzer0ID :: String
+rebelzer0ID = "76561198003569341"
 
