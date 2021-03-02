@@ -1,4 +1,4 @@
-module Main (main, inputLoop, inputLoop2, commonGames, createTxt) where
+module Main (main, inputLoop, commonGames, createTxt) where
 
 -- Importing modules
 
