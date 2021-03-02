@@ -1,4 +1,4 @@
-module Main (main, inputLoop, commonGames, createTxt) where
+module Main (main, inputLoop, inputLoop2, commonGames, createTxt) where
 
 -- Importing modules
 
@@ -16,31 +16,93 @@ import Debug.Trace
 
 -- IO Functions
 
+{- main
+   Starts the program.
+   PRE:-
+   RETURNS:-
+   SIDE-EFFECTS:-
+   EXAMPLES:
+             "**********************************"
+             "* Welcome to Common Steam Games! *"
+             "**********************************"
+-}
 
-test = do
-  let gameurl = ownedGamesURL axelID
-  let summaryurl = aliasURL axelID
-  playtimes <- playtimeFromJSON gameurl
-  username <- aliasFromJSON summaryurl
-  let mapped = mapAliastoPlaytime playtimes username
+main :: IO ()
+main = do 
+    putStrLn "**********************************"
+    putStrLn "* Welcome to Common Steam Games! *"
+    putStrLn "**********************************"
+    inputLoop [] []
 
-  let gameurl2 = ownedGamesURL johanID
-  let summaryurl2 = aliasURL johanID
-  playtimes2 <- playtimeFromJSON gameurl2
-  username2 <- aliasFromJSON summaryurl2
-  let mapped2 = mapAliastoPlaytime playtimes2 username2
+{- inputLoop gameList userList
+   Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
+   PRE: gameList == [] && userList == []
+   SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
+   RETURNS: The commonly owned games between the given users.
+   EXAMPLES:
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           76561198068497293
+           => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
+           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+           1
+           => *** Exception: HttpExceptionRequest Request
 
-  let gameurl3 = ownedGamesURL pavlosID
-  let summaryurl3 = aliasURL pavlosID
-  playtimes3 <- playtimeFromJSON gameurl3
-  username3 <- aliasFromJSON summaryurl3
-  let mapped3 = mapAliastoPlaytime playtimes3 username3
+-}
 
-  let userList = [mapped, mapped2, mapped3]
-  
-  let x = intersectPlayers userList
+inputLoop :: [[(String, String)]] -> [[String]] -> IO ()
+--VARIANT: gameList userList
+inputLoop acc acc2 = do 
 
-  print x
+    setLocaleEncoding utf8
+
+    putStrLn ""
+    putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
+
+    -- Prompts the user to input a steam64
+
+    inputID <- getLine
+    let gamesURL = ownedGamesURL $ inputID
+        userName = aliasURL $ inputID 
+    
+    -- Calling playtimeFromJSON and aliasFromJSON with the steam64
+    
+    retrievedGames <- playtimeFromJSON gamesURL
+    retrievedAlias <- aliasFromJSON userName
+
+    -- Maps the user's playtime to each game in the format of "gameName, userName: x hours"
+
+    let gamePlusPlaytime = mapAliastoPlaytime retrievedGames retrievedAlias
+
+    -- Adds all games and playtime to the accumulator 'acc'
+    -- Adds the user's alias/username to the accumulator 'acc2'
+
+    let games = Data.List.insert gamePlusPlaytime acc
+        aliases = Data.List.insert retrievedAlias acc2
+
+    -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
+
+    putStrLn ""
+    putStrLn "If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else. "
+
+    confirmation <- getLine
+
+    if ((map toUpper confirmation) == "TRUE")
+        then
+            let returnedList = intersectPlayers games 
+            in if (returnedList == []) 
+                    then putStrLn "No common games were found ... "
+                    else do
+                            let tupleList = tupleListToString returnedList
+                            putStrLn "The common games for"
+                            putStrLn $ getUsers (Data.List.concat aliases) ++ " are:"
+                            putStrLn "-----------------------------------------------------------------"
+                            createTxt tupleList
+                            putStrLn $ unlines tupleList
+                            putStrLn "-----------------------------------------------------------------"
+
+                        
+
+        else inputLoop games aliases
 
 {- createTxt list
    Writes all the games in list to a txt file.
@@ -62,88 +124,6 @@ createTxt returnedList = do
     hPutStrLn file $ unlines returnedList
     
     hClose file
-
-{- main
-   Starts the program.
-   PRE:-
-   RETURNS:-
-   SIDE-EFFECTS:-
-   EXAMPLES:
-             "**********************************"
-             "* Welcome to Common Steam Games! *"
-             "**********************************"
--}
-
-main :: IO ()
-main = do 
-    putStrLn "**********************************"
-    putStrLn "* Welcome to Common Steam Games! *"
-    putStrLn "**********************************"
-    inputLoop [] []
-    
-{- inputLoop gameList userList
-   Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
-   PRE: gameList == [] && userList == []
-   SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
-   RETURNS: The commonly owned games between the given users.
-   EXAMPLES:
-           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
-           76561198068497293
-           => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
-           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
-           1
-           => *** Exception: HttpExceptionRequest Request
-
--}
-
-inputLoop :: [[String]] -> [[String]] -> IO ()
---VARIANT: gameList userList
-inputLoop acc acc2 = do 
-    putStrLn ""
-    putStrLn "Please enter a valid Steam64 to a PUBLIC Steam profile ... "
-
-    -- Prompts the user to input a steam64
-
-    inputID <- getLine
-    let
-      userURL = ownedGamesURL $ inputID
-      nameURL = aliasURL $ inputID 
-    
-    
-    -- Calling gamesFromJSON and aliasFromJSON with the steam64
-    
-    usergames <- gamesFromJSON userURL
-    usernames <- aliasFromJSON nameURL
-
-    let
-      steamIDS = Data.List.insert usergames acc
-      aliases = Data.List.insert usernames acc2
-
-    -- Asks the user if they want to input steam64, and in that case to input the keyword 'True'
-
-    putStrLn ""
-    putStrLn "If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else. "
-
-    confirmation <- getLine
-
-    if ((map toUpper confirmation) == "TRUE")
-        then
-
-    -- Check if steamIDS only contain a set of owned games for one person 
-    -- or if the multiple steam users dont have any games in common 
-
-            let returnedList = commonGames steamIDS in 
-                if (returnedList == []) 
-                    then putStrLn "No common games were found ... "
-                    else do
-                          putStrLn "The common games for"
-                          putStrLn $ getUsers (Data.List.concat aliases) ++ " are:"
-                          putStrLn "-----------------------------------------------------------------"
-                          createTxt $ Data.List.sort returnedList
-                          putStrLn $ unlines $ Data.List.sort $ returnedList
-                          putStrLn "-----------------------------------------------------------------"
-
-        else inputLoop steamIDS aliases
 
 -- Pure functions
 
@@ -225,7 +205,7 @@ getUsers (x:xs) = x ++ ", " ++  getUsers xs
     https://artyom.me/aeson (Accessed 18 Feb)
     https://hackage.haskell.org/package/bytestring-0.11.1.0/docs/Data-ByteString-Char8.html (Accessed 22 Feb)
     https://jsonformatter.org/json-to-haskell (Accessed 22 Feb)
-
+    https://stackoverflow.com/questions/25373116/how-can-i-set-my-ghci-prompt-to-a-lambda-character-on-windows (Accessed 1 March)
 -}
 
 -- TEST CASES
