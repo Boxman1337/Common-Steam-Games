@@ -158,7 +158,7 @@ getUsers :: [String] -> String
 --VARIANT: length list
 getUsers [] = ""
 getUsers [x] = x
-getUsers (x:xs) = x ++ ", " ++  getUsers xs
+getUsers (x:xs) = x ++ ", " ++ getUsers xs
 
 
 
@@ -175,7 +175,7 @@ getUsers (x:xs) = x ++ ", " ++  getUsers xs
     
     stack install <library>
     or 
-    cabal install <library>
+    cabal install <library> 
     then add <library> under package.yaml dependencies
     do not change .cabal manually, each library is added automatically by stack
 

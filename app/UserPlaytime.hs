@@ -10,6 +10,14 @@ import Data.List
 
 -- Pure Functions
 
+{- mapAliastoPlaytime listofTuples username
+   Maps username to a users' game and playtime in the format 'username: playtime (in hours)'
+   PRE: -
+   RETURNS: A list of tuples [(x,y)]
+   SIDE-EFFECTS: -
+   EXAMPLES:
+-}
+
 mapAliastoPlaytime :: [(String, String)] -> [String] -> [(String, String)]
 mapAliastoPlaytime [] _ = []
 mapAliastoPlaytime ((gName, gTime):xs) uName = 
