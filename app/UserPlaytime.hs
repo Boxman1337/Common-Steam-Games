@@ -11,11 +11,12 @@ import Data.List
 -- Pure Functions
 
 mapAliastoPlaytime :: [(String, String)] -> [String] -> [(String, String)]
-mapAliastoPlaytime [] uName = []
+mapAliastoPlaytime [] _ = []
 mapAliastoPlaytime ((gName, gTime):xs) uName = 
     (gName, (head uName) ++ ": " ++ gTime) : mapAliastoPlaytime xs uName
 
 intersectFirst :: [(String, String)] -> [(String, String)] -> [(String, String)]
+intersectFirst [] [] = []
 intersectFirst l1 l2 = Data.List.intersectBy (\(x,y) (z,w) -> x == z) l1 l2 
 
 combinePlaytime :: [((String, String),(String, String))] -> [(String, String)]
@@ -30,8 +31,10 @@ intersectThenMerge player1 player2 =
     in combinePlaytime $ zip player1List player2List
 
 intersectPlayers :: [[(String, String)]] -> [(String, String)]
+intersectPlayers [] = []
 intersectPlayers (x:xs) = foldl intersectThenMerge x xs
 
 tupleListToString :: [(String, String)] -> [String]
 tupleListToString [] = []
+tupleListToString ((x,y):[]) = [(x ++ " -- " ++ y)]
 tupleListToString ((x,y):xs) = (x ++ " -- " ++ y) : tupleListToString xs
