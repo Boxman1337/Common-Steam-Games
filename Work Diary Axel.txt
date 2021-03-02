@@ -40,10 +40,10 @@ Added playtimeFromJSON function and kept working out a solution for adding each 
 I managed to create a custom intersect function for finding games users have in common while preserving their individual playtime on each of the games.
 I then created some auxiliary functions for combining these lists to the form of "gameName -- user1: x hours, user2: y hours"
 
-2 March 9:00 -- 15:00 (6 hours)
+2 March 9:00 -- 16:00 (7 hours)
 I continued with trying to implement playtime into the main function for an unlimited amount of users and managed to build it into our executable. 
 I added some comments, specifications and fixed some run time errors regarding printing unsupported characters,
-and then sat with Johan and Pavlos and updated our report and our flowchart for the project. 
+and then sat with Johan and Pavlos and updated our report and our flowchart for the project. We had a meeting with Ghafour and I then worked on writing specifications.
 
 
 Currently: 50 hours (Give or take)
