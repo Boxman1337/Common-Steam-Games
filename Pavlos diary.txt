@@ -4,7 +4,7 @@ Me, Axel and Johan decided to start a call where we talked about group rules for
 16th of february (1 hours 30 minutes)
 Me, Axel and Johan had a meeting with our TA. We got a thumbs up meaning that we could start working on the project. After the meeting me and my group discussed how we are going to approach this.
 
-18th of february (4 hours)
+18th of february (5 hours)
 I start by researching how to work around APIs and try to figure out how we can create a program that asks for a steam key, and with that somehow get a list of all the games owned by that steam user.
 After a while, Axel and Johan joined me and we worked together. We succeeded in "downloading" the information from the steam api and we now are able to get a large string with all games and some more info.
 What we now have to do is filter the games and add them to a list that we are then going to compare with the other users. 
@@ -12,7 +12,7 @@ What we now have to do is filter the games and add them to a list that we are th
 20th of february (1 hour 30 minutes)
 I started reading into json in order to learn about coverting what we downloaded it into something we can use for our program however i felt it wasnt anything we could use.
 
-22nd of february (4 hours)
+22nd of february (5 hours)
 Coms with team cause apparently we were not thinking about how to create the program the same way. 
 Things also became kinda weird cause we never really divided the program, so everything i thought of doing, Johan and Axel were already working on, so i decided to ask what i should do and i was told to try and help with the json parsing Axel was working on.
 it feels like everything in our program is easy except for that one thing. I tried multiple different things and none of them worked. I got tired and gave up and instead started writing on the report.
@@ -25,15 +25,15 @@ Axel managed to finish the function to get a list of games owned by the steam64.
 I then worked on implementing the function into the json parser that axel created, however it proved to be hard because of the recursion that was required to be created along with my lack of knowledge of working around IO functions.
 after about an hour of work i succeeded in creating a recursion that would allow the user to compare as many steam64s as they wanted. This meant that our program was done and working. Now we just need to add specifications and maybe rename some functions add comments etc.
 
-26th of february (3 hours)
+26th of february (4 hours)
 I spent time writing on the report, then had the meeting with the TA. We discussed about how our program seemed a bit narrow even tho it wasnt in his opinion. Our TA wanted us to make the results a bit more comprehensible and possibly add a few functions to make it seem more complex. He gave us a bunch of examples on how we could do that. 
 
-27th of february (2 hours)
+27th of february (3 hours)
 I spent time polishing up our code, making it as comprehensible ass possible, i added some specifications, and fixed up a couple of wrongs like the specification on the function that intersects the list. 
 Originally that list would only work if the elements of the list were strings, but i changed it, making it more general.
 Now the function would work no matter the element inside the list. (even tho in reality, this function will only ever get strings in it from the main functions, having it be more general feels better and more complete)
 
-28th of february (4 hours)
+28th of february (5 hours)
 Although i suggested some stuff in our chat today, i spent most of my time writing on the report.
 Amongst other stuff, I rewrote the introduction as i felt our last was kind of narrow and pretty straightforward. 
 As it felt kind of bad to just straight up delete our old one, I decided to leave it up and wait for my group to read it so that we, together, could decide if this new one was somewhat more fitting.
@@ -42,4 +42,8 @@ As it felt kind of bad to just straight up delete our old one, I decided to leav
 I continued writing on the report. We had a meeting in our group where we basically confirmed what had ben done and what was left . 
 We came to a conclusion that what needed to be done was finish writing the report, write some testcases and check on the specification incase we had missed or forgotten something.
 Personally i thought id spend most of my time on the report, as i feel like that is what requires most of the time right now
+
+2nd of march (5 hours)
+Just continued writing on the report once again. Had a meetingw ith group before the meeting with TA where we concluded stuff like what needed to be done etc.
+Now we are at the last part where we just make sure everything is working etc.
 
