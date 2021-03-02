@@ -13,9 +13,9 @@ Three data types in total had to be written.
 22/2 - 2 hours: I examined Axel's progress on the JSON instances and his successful attempt at parsing the JSON-file. After that I began working on a function that returns the common games, represented by a list of string.
 23/2 - 3 hours: I continued to work on my list function. I came up with two possible solutions, the first compares two lists at a time and the second counts how many times a game occurrs in a concated list of owned games.
 I ended up getting stuck on the first solution so I moved on to the second one. I got pretty far on it, but I got stuck on the final function.
-24/2 - 2 hours: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great! Pavlos wrote a function that utilized the intersection function in Data.List. 
+24/2 - 3 hours: I asked for advice from Pavlos and Axel with the function I was working on. Together we could write a small and efficient function that does its job great! Pavlos wrote a function that utilized the intersection function in Data.List. 
 It proved to exactly what we were looking for, so it was implemented in Main.hs. Later in the day, I worked on the rapport.
-25/2 - 2 hours: I examined how far Axel and Pavlos had gotten on the project. I read through their code in detail in order to fully grasp their implementation. I later began to describe the program in the report.
+25/2 - 3 hours: I examined how far Axel and Pavlos had gotten on the project. I read through their code in detail in order to fully grasp their implementation. I later began to describe the program in the report.
 26/2 - 5 hours: I worked on the report and had a look on previous student's works in order to get a good idea for the structure of it. Later, we had our meeting with the TA, where he gave some suggestions on how to make our program more comprehensive.
 Directly afterwards, we held a meeting discussing which new functions we should try and implement and how to divide the tasks between us. Then I began working on my assigned task. Which is creating a textfile containing the common games. This is going well so far.
 I used writeFile.
@@ -26,3 +26,5 @@ I made a flow chart that illustrates how the functions communicate with each oth
 1/3 - 7 hours: I wrote a bunch on the report, specifically the section that describes how the program works in detail. Then, I wrote function specifications and checked with Axel how he was progressing on the playtime function.
 Afterwards, the group held a meeting in which we all updated each other and discussed which tasks remain. We talked about how to write testcases and the report. Axel showed us his progress and me and Pavlos tried 
 to give some advice. I wrote a to-do list for the group. After that I worked on the test cases and finished the function specifications. Later, I had a look at Axel's new features and wrote on the report.
+2/3 - _ hours: I began with examining Axel's new functions. Then I described the functions and how they interact in the report. After that I began writing the discussion section on the report and some additional test cases in main.hs and JSONParsing.hs. I also updated the flowchart
+with the aid of Axel.

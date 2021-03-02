@@ -210,5 +210,8 @@ getUsers (x:xs) = x ++ ", " ++ getUsers xs
 
 -- TEST CASES
 {-
-test1b = TestCase (assertEqual "for 
+test1b = TestCase (assertEqual "for (getUsers ["Gabe", "Newell"]),"  "Gabe, Newell" (getUsers ["Gabe", "Newell"])
+test2b = TestCase (assertEqual "for (getUsers [""]),"  "" (getUsers [""])
+test3b = TestCase (assertEqual "for (getUsers ["",""]),"  ", " (getUsers ["",""])
+test3b = TestCase (assertEqual "for (getUsers ["Gabe"]),"  "Gabe" (getUsers ["Gabe"])
 -}
