@@ -13,7 +13,6 @@ import qualified Data.ByteString.Lazy.Char8 as C
 import Network.HTTP.Conduit (simpleHttp)
 import Data.Text hiding (map)
 import Data.Aeson
-import Control.Monad
 
 -- Data types for retrieving owned games
 {- GamesResponse
