@@ -47,3 +47,9 @@ Personally i thought id spend most of my time on the report, as i feel like that
 Just continued writing on the report once again. Had a meetingw ith group before the meeting with TA where we concluded stuff like what needed to be done etc.
 Now we are at the last part where we just make sure everything is working etc.
 
+3rd of march (5 hours) 
+We talked early in the morning and came to the agreement that we should focus on finishing this project up today, as tomorrow is the deadline. 
+As my group was working on the finishing touches on the program, i figured that i would finish up the rapport, as i already had worked on it a ton. 
+After creating the reference list which was the absolute last thing we added to the report, i read it through once more. 
+We had a discussion on wether we should have the titles numbered or not and we came to the conclusion of having the main titles numbered and the rest not. This was because we had multiple under titles which would make it look kind of weird.
+We thought that something like 3.3.2.1 would make it pretty weird, so we abstained from doing that, while still having some sort of enumeration.
