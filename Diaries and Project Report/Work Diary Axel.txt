@@ -46,6 +46,4 @@ I added some comments, specifications and fixed some run time errors regarding p
 and then sat with Johan and Pavlos and updated our report and our flowchart for the project. We had a meeting with Ghafour and I then worked on writing specifications.
 Later that night I continued with writing function specifications and some more on the report.
 
-Currently: 50 hours (Give or take)
-Convert to PDF
 
