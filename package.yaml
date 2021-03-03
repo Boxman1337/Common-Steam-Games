@@ -28,6 +28,7 @@ dependencies:
 - http-conduit
 - text
 - vector
+- HUnit
 
 library:
   source-dirs: src

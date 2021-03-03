@@ -13,18 +13,19 @@ import Data.Char
 import System.IO
 import GHC.IO.Encoding
 import Debug.Trace
+import HUnit
 
 -- IO Functions
 
 {- main
-   Starts the program.
-   PRE:-
-   RETURNS:-
-   SIDE-EFFECTS:-
-   EXAMPLES:
-             "**********************************"
-             "* Welcome to Common Steam Games! *"
-             "**********************************"
+    Starts the program.
+    PRE:-
+    RETURNS:-
+    SIDE-EFFECTS:-
+    EXAMPLES:
+            "**********************************"
+            "* Welcome to Common Steam Games! *"
+            "**********************************"
 -}
 
 main :: IO ()
@@ -35,17 +36,18 @@ main = do
     inputLoop [] []
 
 {- inputLoop gameList userList
-   Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
-   PRE: gameList == [] && userList == []
-   SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
-   RETURNS: The commonly owned games between the given users.
-   EXAMPLES:
-           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
-           76561198068497293
-           => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
-           Please enter a valid Steam64 to a PUBLIC Steam profile ... 
-           1
-           => *** Exception: HttpExceptionRequest Request
+    Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
+    PRE: gameList == [] && userList == []
+    SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
+    RETURNS: The commonly owned games between the given users.
+    EXAMPLES:
+            Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+            76561198068497293
+            => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
+
+            Please enter a valid Steam64 to a PUBLIC Steam profile ... 
+            1
+            => *** Exception: HttpExceptionRequest Request
 
 -}
 
@@ -105,11 +107,11 @@ inputLoop acc acc2 = do
         else inputLoop games aliases
 
 {- createTxt list
-   Writes all the games in list to a txt file.
-   PRE: -
-   RETURNS:-
-   SIDE-EFFECTS: A txt file is written, containing all games in list.
-   EXAMPLES:
+    Writes all the games in list to a txt file.
+    PRE: -
+    RETURNS:-
+    SIDE-EFFECTS: A txt file is written, containing all games in list.
+    EXAMPLES:
 -}
 
 createTxt :: [String] -> IO ()
@@ -128,14 +130,14 @@ createTxt returnedList = do
 -- Pure functions
 
 {- commonGames listofLists
-   Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
-   PRE: -
-   RETURNS: a list with all the common elements inside the lists within the ListofLists
-   SIDE-EFFECTS: -
-   EXAMPLES:
-   commonGames [[1,2,3],[1],[2],[3]]     => []
-   commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
-   commonGames [[1,2,3]] => [1,2,3]
+    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
+    PRE: -
+    RETURNS: a list with all the common elements inside the lists within the ListofLists
+    SIDE-EFFECTS: -
+    EXAMPLES:
+                commonGames [[1,2,3],[1],[2],[3]]     => []
+                commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
+                commonGames [[1,2,3]] => [1,2,3]
 -}
 
 commonGames :: Eq a => [[a]] -> [a]
@@ -154,6 +156,7 @@ commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGa
            getUsers ["Gabe"] == "Gabe"
            getUsers ["Gabe", "Newell"] == "Gabe, Newell"
 -}
+
 getUsers :: [String] -> String
 --VARIANT: length list
 getUsers [] = ""
