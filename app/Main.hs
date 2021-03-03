@@ -166,7 +166,12 @@ getUsers (x:xs) = x ++ ", " ++ getUsers xs
     Compile / Runtime Instructions: 
     ---------------------
 
-    stack build
+    stack build 
+    or
+    stack build --verbose
+
+    then
+
     stack ghci ./app/Main.hs
 
 
