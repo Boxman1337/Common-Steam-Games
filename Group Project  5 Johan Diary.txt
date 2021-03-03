@@ -5,6 +5,7 @@
 Since it was neccesary in order to parse with Aeson. We had a look at these sites: https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
 https://hackage.haskell.org/package/aeson-1.5.5.1/docs/Data-Aeson.html
 17/2 - 3 hours: I followed the aforementioned guide on schoolofhaskell.com. I gave me a better understanding on how to parse files from the internet. Although, I could not get the FromJSON and ToJSON instances to properly work with the Steam API.
+So, I started working on the report, its introduction part.
 18/2 - 2 hours: I sat in a call with Pavlos and Axel, where we discussed our progress on the project. Additionally, me and Axel assisted Pavlos getting his libraries to work, which we did after a little while.
 We also discussed our findings on how to work with the Aeson package and the Generic package. We also expermented with it, in order to obtain a better understanding.
 19/2 - 2 hours: I read up on how to parse JSON-files with the Aeson package. I obtained some useful information on one guide, and I applied some of that new knowledge to my Haskell file.
@@ -26,5 +27,6 @@ I made a flow chart that illustrates how the functions communicate with each oth
 1/3 - 7 hours: I wrote a bunch on the report, specifically the section that describes how the program works in detail. Then, I wrote function specifications and checked with Axel how he was progressing on the playtime function.
 Afterwards, the group held a meeting in which we all updated each other and discussed which tasks remain. We talked about how to write testcases and the report. Axel showed us his progress and me and Pavlos tried 
 to give some advice. I wrote a to-do list for the group. After that I worked on the test cases and finished the function specifications. Later, I had a look at Axel's new features and wrote on the report.
-2/3 - _ hours: I began with examining Axel's new functions. Then I described the functions and how they interact in the report. After that I began writing the discussion section on the report and some additional test cases in main.hs and JSONParsing.hs. I also updated the flowchart
-with the aid of Axel.
+2/3 - 7 hours: I began with examining Axel's new functions. Then I described the functions and how they interact in the report. After that I began writing the discussion section on the report and some additional test cases in main.hs and JSONParsing.hs. I also updated the flowchart
+with the aid of Axel. Afterwards, we had our meeting with the TA, where he told how we should hand everything in and how to prepare the oral presentation. The group held a meeting after that, where we discussed how to procceed and what had to be done. After that was done, I took a break and later
+wrote some more testcases and proofread and wrote a bit on the report.
