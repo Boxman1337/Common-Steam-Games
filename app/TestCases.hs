@@ -22,7 +22,7 @@ test1j = TestCase (assertEqual "for (ownedGamesURL 76561198046588035)"      ("ht
 test2j = TestCase (assertEqual "for (aliasURL 76561198046588035)"           ("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=76561198046588035") (aliasURL "76561198046588035"))
 
 -- UserPlaytime functions
-test1u = TestCase (assertEqual "for (mapAliastoPlaytime [(a, 50 hours)] [b])"                                                                         [("a", "b: 50 hours")]                                  (mapAliastoPlaytime [("a", "50 hours")] ["b"]))
+test1u = TestCase (assertEqual "for (mapAliastoPlaytime [(Garry's Mod, 50 hours)] [axel])"                                                            [("Garry's Mod", "axel: 50 hours")]                     (mapAliastoPlaytime [("Garry's Mod", "50 hours")] ["axel"]))
 test2u = TestCase (assertEqual "for (intersectFirst [(Garry's Mod, axel: 1146 hours) , (Portal,axel: 8 hours)] [(Garry's Mod, johan: 14 hours)])"     [("Garry's Mod", "axel: 1146 hours")]                   (intersectFirst [("Garry's Mod","axel: 1146 hours"),("Portal","axel: 8 hours")] [("Garry's Mod","johan: 14 hours")]))
 test3u = TestCase (assertEqual "for (intersectFirst [(Garry's Mod, johan: 14 hours)] [(Garry's Mod, axel: 1146 hours),(Portal, axel: 8 hours)])"      [("Garry's Mod", "johan: 14 hours")]                    (intersectFirst [("Garry's Mod","johan: 14 hours")] [("Garry's Mod","axel: 1146 hours"),("Portal","axel: 8 hours")]))
 test4u = TestCase (assertEqual "for (combinePlaytime [((Garry's Mod, johan: 50 hours),(Garry's Mod, axel: 190 hours))])"                              [("Garry's Mod", "johan: 50 hours, axel: 190 hours")]   (combinePlaytime [(("Garry's Mod","johan: 50 hours"),("Garry's Mod","axel: 190 hours"))]))
@@ -49,14 +49,3 @@ tests = TestList    [
                     ]
 
 runtests = runTestTT $ tests
-
-{- 
-    Run testcases by typing these lines in terminal:
-    ------------------------------------
-
-    stack ghci .\app\TestCases.hs
-
-    then
-
-    runtests
--}

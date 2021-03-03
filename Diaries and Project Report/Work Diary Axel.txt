@@ -46,4 +46,8 @@ I added some comments, specifications and fixed some run time errors regarding p
 and then sat with Johan and Pavlos and updated our report and our flowchart for the project. We had a meeting with Ghafour and I then worked on writing specifications.
 Later that night I continued with writing function specifications and some more on the report.
 
+3 March 10:00 -- 13:00, 15:00 -- 17:00 (3 + 2 hours)
+I finished with writing specifications and examples for all of our pure functions and monad/IO functions.
+I then wrote Test cases using HUnit with Johan and worked on finishing the report, 
+and later added some runtime instructions for running our software inside Main.hs and wrote down some code references.
 
