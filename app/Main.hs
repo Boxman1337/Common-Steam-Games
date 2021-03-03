@@ -117,6 +117,7 @@ inputLoop acc acc2 = do
 createTxt :: [String] -> IO ()
 createTxt returnedList = do
     setLocaleEncoding utf8
+    
     writeFile ("CommonGames.txt") ""
     file <- openFile "CommonGames.txt" WriteMode
     
