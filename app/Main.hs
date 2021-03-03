@@ -13,7 +13,7 @@ import Data.Char
 import System.IO
 import GHC.IO.Encoding
 import Debug.Trace
-import HUnit
+import Test.HUnit
 
 -- IO Functions
 
@@ -215,39 +215,6 @@ getUsers (x:xs) = x ++ ", " ++ getUsers xs
     https://jsonformatter.org/json-to-haskell (Accessed 22 Feb)
     https://stackoverflow.com/questions/25373116/how-can-i-set-my-ghci-prompt-to-a-lambda-character-on-windows (Accessed 1 March)
 -}
-
-t = "76561198068497293"
-t2 = "76561198046588035"
-
-url1 = ownedGamesURL t
-url2 = aliasURL t
-
-url3 = ownedGamesURL t2
-url4 = aliasURL t2
-
-json1 = do
-    j1 <- gamesFromJSON url1
-    return j1
-
-json2 = do
-    j2 <- aliasFromJSON url2
-    return j2
-
-json3 = do
-    j3 <- playtimeFromJSON url1
-    j4 <- playtimeFromJSON url3
-    let l3 = mapAliastoPlaytime j3 ["axel"]
-    let l4 = mapAliastoPlaytime j4 ["johan"]
-    let z = intersectThenMerge l3 l4
-    print l3
-    putStrLn ""
-    print l4
-    putStrLn ""
-    print z
-
-
-
-
 
 -- TEST CASES
 {-

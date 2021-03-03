@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 208758c4d1f43a81912c8a8836779c0e3b771882cc45a2049352309b26256650
+-- hash: 54c865327010a35bdad9ce9af310889ab629f87aedb9fdf300a8789069164f37
 
 name:           CommonSG
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       src
   build-depends:
       HTTP
+    , HUnit
     , aeson
     , base >=4.7 && <5
     , bytestring
@@ -56,6 +57,7 @@ executable CommonSG-exe
   build-depends:
       CommonSG
     , HTTP
+    , HUnit
     , aeson
     , base >=4.7 && <5
     , bytestring
@@ -75,6 +77,7 @@ test-suite CommonSG-test
   build-depends:
       CommonSG
     , HTTP
+    , HUnit
     , aeson
     , base >=4.7 && <5
     , bytestring
