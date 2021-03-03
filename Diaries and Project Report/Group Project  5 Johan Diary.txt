@@ -30,3 +30,6 @@ to give some advice. I wrote a to-do list for the group. After that I worked on 
 2/3 - 7 hours: I began with examining Axel's new functions. Then I described the functions and how they interact in the report. After that I began writing the discussion section on the report and some additional test cases in main.hs and JSONParsing.hs. I also updated the flowchart
 with the aid of Axel. Afterwards, we had our meeting with the TA, where he told how we should hand everything in and how to prepare the oral presentation. The group held a meeting after that, where we discussed how to procceed and what had to be done. After that was done, I took a break and later
 wrote some more testcases and proofread and wrote a bit on the report.
+3/3 - 4 hours: The group discussed what was left to be done and we decided on who should do what. During the day, I finished the report, wrote all the sections that were missing and cleaned it a bit. After that I helped Axel with writing the testcases and they were also finished.
+The HUnit tests worked. After that I fixed the footnotes with Pavlos and added references, and we fixed some headlines as well. We also included the code references. 
+Since we are supposed to give clear credit when we have read about code on the internet. After that, we checked that everything was right and we handed everything in on Studium.
