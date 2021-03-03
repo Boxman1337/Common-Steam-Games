@@ -1,4 +1,4 @@
-module Main (main, inputLoop, commonGames, createTxt) where
+module Main (main, inputLoop, createTxt, getUsers) where
 
 -- Importing modules
 
@@ -129,24 +129,6 @@ createTxt returnedList = do
 
 -- Pure functions
 
-{- commonGames listofLists
-    Takes a list of lists ListofLists and checks for common elements within the lists inside the ListofLists
-    PRE: -
-    RETURNS: a list with all the common elements inside the lists within the ListofLists
-    SIDE-EFFECTS: -
-    EXAMPLES:
-                commonGames [[1,2,3],[1],[2],[3]]     => []
-                commonGames [[1,2,3],[1],[1,2],[1,3]] => [1]
-                commonGames [[1,2,3]] => [1,2,3]
--}
-
-commonGames :: Eq a => [[a]] -> [a]
---VARIANT: length listofLists
-commonGames [] = []
-commonGames (x:(y:[])) = (Data.List.intersect x y) 
-commonGames (x:[]) = x
-commonGames (x:(y:ys)) = Data.List.intersect (Data.List.intersect x y) (commonGames ys)
-
 {- getUsers list
    Takes a list containing usernames and returns them in a single string.
    PRE: -
@@ -216,10 +198,4 @@ getUsers (x:xs) = x ++ ", " ++ getUsers xs
     https://stackoverflow.com/questions/25373116/how-can-i-set-my-ghci-prompt-to-a-lambda-character-on-windows (Accessed 1 March)
 -}
 
--- TEST CASES
-{-
-test1b = TestCase (assertEqual "for (getUsers ["Gabe", "Newell"]),"  "Gabe, Newell" (getUsers ["Gabe", "Newell"])
-test2b = TestCase (assertEqual "for (getUsers [""]),"  "" (getUsers [""])
-test3b = TestCase (assertEqual "for (getUsers ["",""]),"  ", " (getUsers ["",""])
-test3b = TestCase (assertEqual "for (getUsers ["Gabe"]),"  "Gabe" (getUsers ["Gabe"])
--}
+

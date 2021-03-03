@@ -98,10 +98,3 @@ tupleListToString :: [(String, String)] -> [String]
 tupleListToString [] = []
 tupleListToString ((x,y):[]) = [(x ++ " -- " ++ y)]
 tupleListToString ((x,y):xs) = (x ++ " -- " ++ y) : tupleListToString xs
-
-
--- TEST CASES
-
-test1 = TestCase (assertEqual "for (getUsers ["Gabe", "Newell"]),"  "Gabe, Newell" (getUsers ["Gabe", "Newell"]))
-
-tests = TestList [TestLabel "test1" test1, TestLabel "test2" test2]
