@@ -25,9 +25,6 @@ import Test.HUnit
             stack ghci ./app/Main.hs
                 then
                     main
-
-
-
     When installing a library, use:
     ---------------------
     stack install <library>
@@ -36,17 +33,12 @@ import Test.HUnit
         then
             add <library> under package.yaml dependencies
             (do not change .cabal manually, each library is added automatically by stack)
-
-
-
     Run testcases by typing these lines in terminal:
     ------------------------------------
     stack ghci .\app\TestCases.hs
         then
             runtests
-
     
-
     Known errors and fix:
     ----------------------
     If you get the error:
@@ -81,18 +73,16 @@ main = do
 
 {- inputLoop gameList userList
     Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
-    PRE: gameList == [] && userList == []
-    SIDE-EFFECTS: Accumulates games in gameList and usernames in userList
+    PRE: -
+    SIDE-EFFECTS: Prints a message asking the user to enter an ID.
     RETURNS: The commonly owned games between the given users.
     EXAMPLES:
             Please enter a valid Steam64 to a PUBLIC Steam profile ... 
             76561198068497293
             => If you want to compare the following users' game libraries for common games, type 'True', otherwise type anything else.
-
             Please enter a valid Steam64 to a PUBLIC Steam profile ... 
             1
             => *** Exception: HttpExceptionRequest Request
-
 -}
 
 inputLoop :: [[(String, String)]] -> [[String]] -> IO ()
@@ -189,12 +179,3 @@ getUsers :: [String] -> String
 getUsers [] = ""
 getUsers [x] = x
 getUsers (x:xs) = x ++ ", " ++ getUsers xs
-
-
-
-
-
-
-
-
-
