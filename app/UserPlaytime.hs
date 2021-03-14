@@ -22,6 +22,7 @@ import Data.List
 -}
 
 mapAliastoPlaytime :: [(String, String)] -> [String] -> [(String, String)]
+--VARIANT: length listofTuples
 mapAliastoPlaytime [] _ = []
 mapAliastoPlaytime ((gName, gTime):xs) uName = 
     (gName, (head uName) ++ ": " ++ gTime) : mapAliastoPlaytime xs uName
@@ -50,6 +51,7 @@ intersectFirst l1 l2 = Data.List.intersectBy (\(x,y) (z,w) -> x == z) l1 l2
 -}          
 
 combinePlaytime :: [((String, String),(String, String))] -> [(String, String)]
+--VARIANT: length list
 combinePlaytime [] = []
 combinePlaytime (((x,y),(_,w)):[]) = [(x, y ++ ", " ++ w)]
 combinePlaytime (((x,y),(_,w)):xs) = (x, y ++ ", " ++ w) : combinePlaytime xs
@@ -95,6 +97,7 @@ intersectPlayers (x:xs) = foldl intersectThenMerge x xs
 -}      
 
 tupleListToString :: [(String, String)] -> [String]
+--VARIANT: length list
 tupleListToString [] = []
 tupleListToString ((x,y):[]) = [(x ++ " -- " ++ y)]
 tupleListToString ((x,y):xs) = (x ++ " -- " ++ y) : tupleListToString xs
