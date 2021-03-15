@@ -33,3 +33,11 @@ wrote some more testcases and proofread and wrote a bit on the report.
 3/3 - 4 hours: The group discussed what was left to be done and we decided on who should do what. During the day, I finished the report, wrote all the sections that were missing and cleaned it a bit. After that I helped Axel with writing the testcases and they were also finished.
 The HUnit tests worked. After that I fixed the footnotes with Pavlos and added references, and we fixed some headlines as well. We also included the code references. 
 Since we are supposed to give clear credit when we have read about code on the internet. After that, we checked that everything was right and we handed everything in on Studium.
+5/3 - 1 hour: We sat and began to work on the presentation. We made the structure of it and worked on the powerpoint slides.
+9/3 - 2 hours: I sat in a call with Pavlos and Axel, where we reheared the presentation. We ended up recording it as that was allowed.
+10/3 - 2 hours: We held our presentation and answered our opponents questions. It went well with answering the questions. However, it turned out that our text and code in the presentation was not readable. So, we are going to have to redo it. The group held a meeting about this and we also discussed which
+feedback to implement into the final project.
+12/3 - 2 hours: We recieved the feedback forms that the opposing group had written about us. Then I discussed with Pavlos and Axel about what needed to be done for the final hand-in. Afterwards I began to adjust the project based on the feedback. Some adjustments to the specifications and I attempted to adjust some code,
+but that was not successful.
+14/3 - 1 hour: I continued to fix things on our projects. This time I fixed the issues with the report.
+15/3 - 1 hour: I sat in a call with Axel and Pavlos where we talked about what was left to be done. Me and Pavlos finished up the report and Axel finished the specifications, with mine and Pavlos' aid. Then I updated my diary and the git, so that it could be ready for the final hand-in.
