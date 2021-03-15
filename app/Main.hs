@@ -57,11 +57,8 @@ import Test.HUnit
     Starts the program.
     PRE:-
     RETURNS:-
-    SIDE-EFFECTS:-
-    EXAMPLES:
-            "**********************************"
-            "* Welcome to Common Steam Games! *"
-            "**********************************"
+    SIDE-EFFECTS:
+        Prints to the console using putStrLn
 -}
 
 main :: IO ()
@@ -74,7 +71,9 @@ main = do
 {- inputLoop gameList userList
     Accumulates the owned games of a user and the user's name. Also prints the games and usernames.
     PRE: -
-    SIDE-EFFECTS: Prints a message asking the user to enter an ID.
+    SIDE-EFFECTS:
+        Prints a message using putStrLn :: String -> IO String,
+        Gets user input using getLine :: IO String
     RETURNS: The commonly owned games between the given users.
     EXAMPLES:
             Please enter a valid Steam64 to a PUBLIC Steam profile ... 
@@ -145,7 +144,6 @@ inputLoop acc acc2 = do
     PRE: -
     RETURNS:-
     SIDE-EFFECTS: A txt file is written, containing all games in list.
-    EXAMPLES:
 -}
 
 createTxt :: [String] -> IO ()

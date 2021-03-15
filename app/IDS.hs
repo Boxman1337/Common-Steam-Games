@@ -19,7 +19,7 @@ ffoxID = "76561198102310085"
 topdogID :: String
 topdogID = "76561198085718707"
 
-whipdashID :: String
+whipdashID :: String    
 whipdashID = "76561198137579128"
 
 lolettID :: String

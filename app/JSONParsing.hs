@@ -158,7 +158,7 @@ instance FromJSON Player where
 
 {- ownedGamesURL id
    Creates a valid URL for Steam's API's GetOwnedGames interface.
-   PRE: id must be a valid Steam64 ID. An available String called apiKey that contains a valid key for Steam's API.
+   PRE: -
    SIDE-EFFECTS: -
    RETURNS: A valid URL for the GetOwnedGames interface containing the user's data.
    EXAMPLES:
@@ -169,7 +169,7 @@ ownedGamesURL steam64 = ("http://api.steampowered.com/IPlayerService/GetOwnedGam
 
 {- aliasURL id
    Creates a valid URL for Steam's API's GetPlayerSummaries interface.
-   PRE: id must be a valid Steam64 ID. An available String called apiKey that contains a valid key for Steam's API.
+   PRE: -
    SIDE-EFFECTS: -
    RETURNS: A valid URL for the GetPlayerSummaries interface containing the user's data.
    EXAMPLES:
@@ -181,16 +181,12 @@ aliasURL steam64 = ("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v
 -- IO Functions
 {- gamesFromJSON url
    Retrieves the list of owned games of a user from Steam's API.
-   PRE: url must contain a valid API key and a valid Steam64 id.
-   SIDE-EFFECTS: -
-   RETURNS: A list containing a Steam user's owned games.
-   EXAMPLES:
-           gamesFromJSON ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=76561198030522647&include_played_free_games=false&include_appinfo=true") == ["Garry's Mod","Plants vs. Zombies: Game of the Year","Operation Flashpoint: Dragon Rising","Aliens vs. Predator","S.T.A.L.K.E.R.: Call of Pripyat","Terraria","Psychonauts","LIMBO","Amnesia: The Dark Descent","Superbrothers: Sword & Sworcery EP","Pox Nora","Thinking with Time Machine","Moonbase Alpha","Gear Up","Wolfenstein: The New Order","Robocraft","PAYDAY 2"]
-
-           gamesFromJSON ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=76561198030522647&include_played_free_games=false&include_appinfo=true") == ["Garry's Mod","Plants vs. Zombies: Game of the Year","Operation Flashpoint: Dragon Rising","Aliens vs. Predator","S.T.A.L.K.E.R.: Call of Pripyat","Terraria","Psychonauts","LIMBO","Amnesia: The Dark Descent","Superbrothers: Sword & Sworcery EP","Pox Nora","Thinking with Time Machine","Moonbase Alpha","Gear Up","Wolfenstein: The New Order","Robocraft","PAYDAY 2"]
-   
-   
+   PRE: url must contain a valid API key and a valid Steam64 id, or else an error occurs
+   SIDE-EFFECTS: 
+        Sends a HTTP request to a url using simpleHttp
+   RETURNS: A list containing a Steam user's owned games.   
 -}
+
 gamesFromJSON :: String -> IO [String]
 gamesFromJSON url = do
     retrieved <- simpleHttp url
@@ -203,13 +199,10 @@ gamesFromJSON url = do
             
 {- aliasFromJSON url
    Retrieves a user's username from Steam's API.
-   PRE: url must contain a valid API key and a valid Steam64 id.
-   SIDE-EFFECTS: -
-   RETURNS: A Steam user's username.
-   EXAMPLES:
-           aliasFromJSON ("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=76561198030522647") == ["the"]
-           aliasFromJSON ("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" ++ apiKey ++ "&steamids=76561198046588035") == ["Glaus"]
-           
+   PRE: url must contain a valid API key and a valid Steam64 id, or else an error occurs
+   SIDE-EFFECTS: 
+        Sends a HTTP request to a url using simpleHttp
+   RETURNS: A Steam user's username.       
 -}
 
 aliasFromJSON :: String -> IO [String]
@@ -224,15 +217,13 @@ aliasFromJSON url = do
 
 {- playtimeFromJSON url
    Retrieves a user's list of games, as well as their playtime on each game.
-   PRE: url must contain a valid API key and a valid Steam64 id.
-   SIDE-EFFECTS: -
+   PRE: url must contain a valid API key and a valid Steam64 id, or else an error occurs
+   SIDE-EFFECTS: 
+        Sends a HTTP request to a url using simpleHttp
    RETURNS: A list containing the owned games of a Steam user and for how long
-   they have played each game.
-   EXAMPLES:
-           playtimeFromJSON  ("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" ++ apiKey ++ "&steamid=76561198046588035&include_played_free_games=false&include_appinfo=true") ==
-[("Counter-Strike","0 hours"),("Counter-Strike: Condition Zero","0 hours"),("Counter-Strike: Condition Zero Deleted Scenes","0 hours"),("Day of Defeat: Source","0 hours"),("Team Fortress Classic","0 hours"),("Day of Defeat","0 hours"),("Deathmatch Classic","0 hours"),("Half-Life: Opposing Force","0 hours"),("Ricochet","0 hours"),("Half-Life","0 hours"),("Half-Life: Blue Shift","0 hours"),("Half-Life 2","0 hours"),("Half-Life 2: Lost Coast","0 hours"),("Counter-Strike: Source","0 hours"),("Half-Life: Source","0 hours"),("Half-Life Deathmatch: Source","0 hours"),("Half-Life 2: Deathmatch","0 hours"),("Half-Life 2: Episode One","0 hours"),("Garry's Mod","49 hours"),("Portal","55 hours"),("Half-Life 2: Episode Two","0 hours"),("Left 4 Dead","0 hours"),("Star Wars: Battlefront 2 (Classic, 2005)","22 hours"),("LEGO\9415 Indiana Jones\8482: The Original Adventures","9 hours"),("LEGO\174 Star Wars\8482: The Complete Saga","0 hours"),("Left 4 Dead 2","1 hours"),("Portal 2","44 hours"),("Crusader Kings II","29 hours"),("Counter-Strike: Global Offensive","821 hours"),("War Thunder","11 hours"),("Thinking with Time Machine","1 hours"),("Moonbase Alpha","0 hours"),("No More Room in Hell","0 hours"),("EVGA Precision X1","4 hours"),("Sven Co-op","0 hours"),("Robocraft","41 hours"),("Everlasting Summer","0 hours"),("NEKOPARA Vol. 1","2 hours"),("ARK: Survival Evolved","82 hours"),("ARK: Survival Of The Fittest","0 hours"),("Brawlhalla","0 hours"),("Undertale","19 hours"),("Danganronpa: Trigger Happy Havoc","6 hours"),("Creativerse","0 hours"),("DOOM","0 hours"),("Risk of Rain 2","15 hours"),("PAYDAY 2","0 hours"),("Sonic Mania","4 hours"),("Doki Doki Literature Club","0 hours"),("Danganronpa V3: Killing Harmony","49 hours"),("Phoenix Wright: Ace Attorney Trilogy","24 hours"),("Among Us","17 hours"),("200% Mixed Juice!","0 hours"),("Acceleration of SUGURI 2","0 hours"),("100% Orange Juice","1 hours"),("Gang of Four","0 hours"),("Helltaker","1 hours"),("Total War: SHOGUN 2","0 hours"),("The LEGO\174 NINJAGO\174 Movie Video Game","0 hours"),("Unfortunate Spacemen","0 hours"),("SEGA Mega Drive & Genesis Classics","5 hours"),("Ultimate Epic Battle Simulator","0 hours")]
-           
+   they have played each game.           
 -}
+
 playtimeFromJSON :: String -> IO [(String, String)]
 playtimeFromJSON url = do
     retrieved <- simpleHttp url 
