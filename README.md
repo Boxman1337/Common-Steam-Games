@@ -2,6 +2,8 @@
 
 Find out what games you and your friends have in common on Steam!
 
+Made using Haskell
+
 # Compile / Runtime Instructions: How to run our software
     stack build 
     
